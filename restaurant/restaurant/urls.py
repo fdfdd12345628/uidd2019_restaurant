@@ -15,11 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url, include
-from noman.views import home
-
+from noman.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('user.urls')),
-    # url(r'/', home, name='home'),
+    path('index/',index),
 ]

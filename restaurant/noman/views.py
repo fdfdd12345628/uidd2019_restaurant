@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http.response import HttpResponse
+from .models import Meal, order
+# Create your views here.
+def index(request):
 
-
-def home(request):
-    return HttpResponse('home')
+    return render(request,"index.html")

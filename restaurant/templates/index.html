@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'semantic.min.css' %}">
+    <script src="{% static 'jquery.js' %}"> </script>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap.min.js' %}" ></script>
+    <script src="{% static 'hammer.js' %}"> </script>
+    <script src="{% static 'jquery.hammer.js' %}"> </script>
+    <title>Title</title>
+</head>
+<body>
+		<h1 id="info">detect gesture</h1>
+
+</body>
+<script>
+    $(document).hammer().on("tap press panleft panright ",function(ev){
+			$("#info").text( ev.type +" gesture detected.");
+});
+</script>
+</html>
