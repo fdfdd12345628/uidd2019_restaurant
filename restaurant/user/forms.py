@@ -7,7 +7,7 @@ class UserLoginForm(auth_forms.AuthenticationForm):
     class Meta:
         model=User
         fields=('username', 'password')
-    pass
+
 
 
 '''class UserForm(forms.ModelForm):
@@ -19,3 +19,9 @@ class UserLoginForm(auth_forms.AuthenticationForm):
 '''
 class SetPassword(forms.BaseForm):
     pass
+
+
+class Register(auth_forms.UserCreationForm):
+    class Meta:
+        model=User
+        fields=('username','email', )
