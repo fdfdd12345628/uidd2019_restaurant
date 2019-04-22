@@ -3,12 +3,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
-from .forms import UserForm
+from django.core.mail import send_mail
+from .forms import UserLoginForm
 
 
 def login_user(request):
     if request.method == 'GET':
-        return render(request, 'accounts/login.html', {'form':UserForm})
+        return render(request, 'accounts/login.html', {'form':UserLoginForm})
         pass
     elif request.method == 'POST':
         username = request.POST['username']
