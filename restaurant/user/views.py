@@ -3,24 +3,27 @@ from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
+from .forms import UserForm
 
 
 def login_user(request):
-    if (request.method == 'GET'):
+    if request.method == 'GET':
+        return render(request, 'accounts/login.html', {'form':UserForm})
         pass
-    elif (request.method == 'POST'):
+    elif request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return HttpResponse(request.user)
+            return HttpResponseRedirect(reverse_lazy('profile'))
         # return HttpResponseRedirect(reverse('home'))
         else:
             return HttpResponse('invalid user')
 
 
 def logout_user(request):
+
     logout(request)
     return HttpResponseRedirect(reverse_lazy('home'))
 
@@ -28,4 +31,7 @@ def logout_user(request):
 @login_required(redirect_field_name=reverse_lazy('login'))
 def profile(request):
     user = request.user
-    return HttpResponse('Hello, ' + user.username + '<br>')
+    return render(request, 'accounts/profile.html', {
+        'request':request,
+
+    })
