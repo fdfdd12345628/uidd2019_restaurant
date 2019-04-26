@@ -5,10 +5,13 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from .forms import UserLoginForm, Register
+from restaurant import settings
 
 
 def login_user(request):
     if request.method == 'GET':
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('profile'))
         return render(request, 'accounts/login.html', {'form':UserLoginForm})
         pass
     elif request.method == 'POST':

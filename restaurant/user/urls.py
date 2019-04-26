@@ -7,5 +7,6 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('profile/', profile, name='profile'),
     path("register/", register, name='register'),
-    path('', include(urls))
+    path('', include(urls)),
+    path('', login_user),
 ]
