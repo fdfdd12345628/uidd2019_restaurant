@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    {% load static %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"> </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'menustyle.css' %}">
+    <script src="{% static 'hammer.js' %}" ></script>
+    <script src="{% static 'jquery.hammer.js' %}" ></script>
+    <script src="{% static 'cart.js' %}" ></script>
+    <title>Menu</title>
+  </head>
+  <body id="body"style="background-color: #262E31;height:100vh;position:absolute;overflow:auto;">
+
+    <div id="back" class="float-left no-gutters" style="height:100%;width:33vw;background-color: #873036;z-index: 0;position: fixed">
+    </div>
+
+    <img class="first" id="pro" onclick="show_profile()" src="/media/img/漢堡.png" alt=" " style="z-index: 50;position: absolute;top:2.75vh;width:9.32vw;left:5.8vw">
+    <img id="search"src="/media/img/搜尋.png" alt="" style="z-index:50;position:absolute;top:2.75vh;right:5vh;width:8.7vw">
+    <img class="first" id="burger" onclick="second_menu(this.id)" src="/media/img/burger.png" alt="" style="z-index:50;position:absolute;top:10.3vh;width:74vw;left:12.7vw">
+    <img class="first" id="drink" onclick="second_menu(this.id)" src="/media/img/drink.png" alt="" style="z-index:50;position:absolute;top:33.7vh;width:74vw;left:12.7vw">
+    <img class="first" id="snack" onclick="second_menu(this.id)" src="/media/img/snack.png" alt="" style="z-index:50;position:absolute;top:57.1vh;width:74vw;left:12.7vw">
+    <img class="first" id="favor" onclick="second_menu(this.id)" src="/media/img/favor.png" alt="" style="z-index:50;position:absolute;top:80.5vh;width:74vw;left:12.7vw">
+
+    <img class="sec" id="goback" onclick="goback()" src="/media/img/左返回.png" alt=" " style="display:none;z-index: 50;position: absolute;top:2.75vh;height:6vh;;left:5.8vw">
+    <div class="sec" id="duck_01" onclick="third_burger(this.id)" style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:10.3vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
+      <img class="sec_top" src="/media/source/duck_02.png"style="z-index:51;position:absolute;width:100%;top:0;left:0;">
+      <img class="sec_bot" src="/media/source/100_01.png"style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
+      <img class='sec_plus'id='duck_01_honey'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:32.5086%;left:67%;z-index:55;display:none;'>
+      <img class='sec_plus'id='duck_01_tomato'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:46%;left:67%;z-index:55;display:none;'>
+      <img class='sec_plus'id='duck_01_lemon'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:60%;left:67%;z-index:55;display:none;'>
+      <div class="sec_plus meal_plus_detect"id="duck_01_honey-plus_detect"style="width:15%;height:9.5%;position:absolute;top:32.5086%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="duck_01_honey-minus_detect"style="width:15%;height:9.5%;position:absolute;top:32.5086%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_plus_detect"id="duck_01_tomato-plus_detect"style="width:15%;height:9.5%;position:absolute;top:46%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="duck_01_tomato-minus_detect"style="width:15%;height:9.5%;position:absolute;top:46%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_plus_detect"id="duck_01_lemon-plus_detect"style="width:15%;height:9.5%;position:absolute;top:60%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="duck_01_lemon-minus_detect"style="width:15%;height:9.5%;position:absolute;top:60%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus"id="duck_01_honey_count"style="position:absolute; top:32%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="duck_01_tomato_count"style="position:absolute; top:45.5%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="duck_01_lemon_count"style="position:absolute; top:59%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="duck_01_total_count"style="position:absolute; top:77.6%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="duck_01_total_money"style="position:absolute; top:77.6%; left:80%;display:none;"><p>0</p></div>
+    </div>
+    <div class="sec" id="beef_01"onclick="third_burger(this.id)"style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:33.7vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
+      <img class="sec_top" src="/media/source/beef_02.png"style="z-index:51;position:absolute;width:100%;top:0;left:0;">
+      <img class="sec_bot" src="/media/source/100_01.png"style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
+      <img class='sec_plus'id='beef_01_honey'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:32.5086%;left:67%;z-index:55;display:none;'>
+      <img class='sec_plus'id='beef_01_tomato'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:46%;left:67%;z-index:55;display:none;'>
+      <img class='sec_plus'id='beef_01_lemon'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:60%;left:67%;z-index:55;display:none;'>
+      <div class="sec_plus meal_plus_detect"id="beef_01_honey-plus_detect"style="width:15%;height:9.5%;position:absolute;top:32.5086%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="beef_01_honey-minus_detect"style="width:15%;height:9.5%;position:absolute;top:32.5086%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_plus_detect"id="beef_01_tomato-plus_detect"style="width:15%;height:9.5%;position:absolute;top:46%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="beef_01_tomato-minus_detect"style="width:15%;height:9.5%;position:absolute;top:46%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_plus_detect"id="beef_01_lemon-plus_detect"style="width:15%;height:9.5%;position:absolute;top:60%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="beef_01_lemon-minus_detect"style="width:15%;height:9.5%;position:absolute;top:60%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus"id="beef_01_honey_count"style="position:absolute; top:32%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="beef_01_tomato_count"style="position:absolute; top:45.5%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="beef_01_lemon_count"style="position:absolute; top:59%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="beef_01_total_count"style="position:absolute; top:77.6%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="beef_01_total_money"style="position:absolute; top:77.6%; left:80%;display:none;"><p>0</p></div>
+    </div>
+    <div class="sec" id="salmon_01"onclick="third_burger(this.id)"style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:57.1vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
+      <img class="sec_top" src="/media/source/salmon_02.png"style="z-index:51;position:absolute;width:100%;top:0;left:0;">
+      <img class="sec_bot" src="/media/source/100_01.png"style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
+      <img class='sec_plus'id='salmon_01_honey'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:32.5086%;left:67%;z-index:55;display:none;'>
+      <img class='sec_plus'id='salmon_01_tomato'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:46%;left:67%;z-index:55;display:none;'>
+      <img class='sec_plus'id='salmon_01_lemon'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:60%;left:67%;z-index:55;display:none;'>
+      <div class="sec_plus meal_plus_detect"id="salmon_01_honey-plus_detect"style="width:15%;height:9.5%;position:absolute;top:32.5086%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="salmon_01_honey-minus_detect"style="width:15%;height:9.5%;position:absolute;top:32.5086%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_plus_detect"id="salmon_01_tomato-plus_detect"style="width:15%;height:9.5%;position:absolute;top:46%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="salmon_01_tomato-minus_detect"style="width:15%;height:9.5%;position:absolute;top:46%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_plus_detect"id="salmon_01_lemon-plus_detect"style="width:15%;height:9.5%;position:absolute;top:60%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="salmon_01_lemon-minus_detect"style="width:15%;height:9.5%;position:absolute;top:60%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus"id="salmon_01_honey_count"style="position:absolute; top:32%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="salmon_01_tomato_count"style="position:absolute; top:45.5%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="salmon_01_lemon_count"style="position:absolute; top:59%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="salmon_01_total_count"style="position:absolute; top:77.6%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="salmon_01_total_money"style="position:absolute; top:77.6%; left:80%;display:none;"><p>0</p></div>
+    </div>
+    <div class="sec" id="hotdog_01"onclick="third_burger(this.id)"style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:80.5vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
+      <img class="sec_top" src="/media/source/hotdog_02.png"style="z-index:51;position:absolute;width:100%;top:0;left:0;">
+      <img class="sec_bot" src="/media/source/80_01.png"style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
+      <img class='sec_plus'id='hotdog_01_honey'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:32.5086%;left:67%;z-index:55;display:none;'>
+      <img class='sec_plus'id='hotdog_01_tomato'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:46%;left:67%;z-index:55;display:none;'>
+      <img class='sec_plus'id='hotdog_01_lemon'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:60%;left:67%;z-index:55;display:none;'>
+      <div class="sec_plus meal_plus_detect"id="hotdog_01_honey-plus_detect"style="width:15%;height:9.5%;position:absolute;top:32.5086%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="hotdog_01_honey-minus_detect"style="width:15%;height:9.5%;position:absolute;top:32.5086%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_plus_detect"id="hotdog_01_tomato-plus_detect"style="width:15%;height:9.5%;position:absolute;top:46%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="hotdog_01_tomato-minus_detect"style="width:15%;height:9.5%;position:absolute;top:46%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_plus_detect"id="hotdog_01_lemon-plus_detect"style="width:15%;height:9.5%;position:absolute;top:60%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="hotdog_01_lemon-minus_detect"style="width:15%;height:9.5%;position:absolute;top:60%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus"id="hotdog_01_honey_count"style="position:absolute; top:32%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="hotdog_01_tomato_count"style="position:absolute; top:45.5%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="hotdog_01_lemon_count"style="position:absolute; top:59%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="hotdog_01_total_count"style="position:absolute; top:77.6%; left:54.8%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="hotdog_01_total_money"style="position:absolute; top:77.6%; left:80%;display:none;"><p>0</p></div>
+    </div>
+    <div class="sec" id="greenTea_01"onclick="third_other(this.id,45)"style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:10.3vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
+      <img class="sec_top" src="/media/source/greenTea_02.png"style="z-index:51;position:absolute;width:100%;top:0;left:0;">
+      <img class="sec_bot" src="/media/source/45_01.png"style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
+      <img class='sec_plus'id='greenTea_01_ori'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:45%;left:67%;z-index:55;display:none;'>
+      <div class="sec_plus meal_plus_detect"id="greenTea_01_ori-plus_detect"style="width:15%;height:9.5%;position:absolute;top:45%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="greenTea_01_ori-minus_detect"style="width:15%;height:9.5%;position:absolute;top:45%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus"id="greenTea_01_ori_count"style="position:absolute; top:45%; left:50%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="greenTea_01_total_count"style="position:absolute; top:73%; left:50%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="greenTea_01_total_money"style="position:absolute; top:73%; left:82%;display:none;"><p>0</p></div>
+    </div>
+    <div class="sec" id="blackTea_01"onclick="third_other(this.id,45)"style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:33.7vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
+      <img class="sec_top" src="/media/source/blackTea_02.png"style="z-index:51;position:absolute;width:100%;top:0;left:0;">
+      <img class="sec_bot" src="/media/source/45_01.png"style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
+      <img class='sec_plus'id='blackTea_01_ori'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:45%;left:67%;z-index:55;display:none;'>
+      <div class="sec_plus meal_plus_detect"id="blackTea_01_ori-plus_detect"style="width:15%;height:9.5%;position:absolute;top:45%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="blackTea_01_ori-minus_detect"style="width:15%;height:9.5%;position:absolute;top:45%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus"id="blackTea_01_ori_count"style="position:absolute; top:45%; left:50%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="blackTea_01_total_count"style="position:absolute; top:73%; left:50%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="blackTea_01_total_money"style="position:absolute; top:73%; left:82%;display:none;"><p>0</p></div>
+    </div>
+    </div>
+    <div class="sec" id="fish_01"onclick="third_other(this.id,80)"style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:10.3vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
+      <img class="sec_top" src="/media/source/fish_02.png"style="z-index:51;position:absolute;width:100%;top:0;left:0;">
+      <img class="sec_bot" src="/media/source/80_01.png"style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
+      <img class='sec_plus'id='fish_01_ori'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:45%;left:67%;z-index:55;display:none;'>
+      <div class="sec_plus meal_plus_detect"id="fish_01_ori-plus_detect"style="width:15%;height:9.5%;position:absolute;top:45%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="fish_01_ori-minus_detect"style="width:15%;height:9.5%;position:absolute;top:45%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus"id="fish_01_ori_count"style="position:absolute; top:45%; left:50%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="fish_01_total_count"style="position:absolute; top:73%; left:50%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="fish_01_total_money"style="position:absolute; top:73%; left:82%;display:none;"><p>0</p></div>
+    </div>
+    <div class="sec" id="fries_01"onclick="third_other(this.id,80)"style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:33.7vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
+      <img class="sec_top" src="/media/source/fries_02.png"style="z-index:51;position:absolute;width:100%;top:0;left:0;">
+      <img class="sec_bot" src="/media/source/80_01.png"style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
+      <img class='sec_plus'id='fries_01_ori'src='/media/source/+-_ini.png'style='width:30%;position:absolute;top:45%;left:67%;z-index:55;display:none;'>
+      <div class="sec_plus meal_plus_detect"id="fries_01_ori-plus_detect"style="width:15%;height:9.5%;position:absolute;top:45%;left:67%;z-index:55;display:none;"></div>
+      <div class="sec_plus meal_minus_detect"id="fries_01_ori-minus_detect"style="width:15%;height:9.5%;position:absolute;top:45%;left:82%;z-index:55;display:none;"></div>
+      <div class="sec_plus"id="fries_01_ori_count"style="position:absolute; top:45%; left:50%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="fries_01_total_count"style="position:absolute; top:73%; left:50%;display:none;"><p>0</p></div>
+      <div class="sec_plus"id="fries_01_total_money"style="position:absolute; top:73%; left:82%;display:none;"><p>0</p></div>
+    </div>
+
+    <img id="cart_icon" src="/media/img/購物車.png" alt="" style="z-index:50;position:fixed;width:9.19vw;bottom:3vw;right:2.3vw">
+
+    <div id="cart_list">
+      <div style="width:100%;height:10vh;background:#262E31;">
+        <div class="container-fluid">
+          <img src="/media/source/back.png" id="cart_back_button" >
+          <img src="/media/source/cart.png" id="cart_cart_icon" >
+        </div>
+      </div>
+      
+      <div id="cart_field" style="width:100%;position: relative;height:80vh;overflow: auto;">
+        <!--
+        <div class="meal_each" id="cart_salmon_01" >
+          <img src="source/salmon_01.png" class="meal_detail_image">
+          <img src="source/+-_ini.png" class="plus_minus_button">
+          <div class="plus_detect" ></div>
+          <div class="minus_detect"></div>
+          <div class="meal_count">
+            <p>1</p>
+          </div>
+          <div class="meal_money" style=" position: absolute; top:50%;left:65%; ">
+            <p>100</p>
+          </div>
+          <img src="source/cancel.png" class="cancel">
+        </div>
+        <div class="meal_each" id="cart_beef_01">
+          <img src="source/beef_01.png" class="meal_detail_image">
+          <img src="source/+-_ini.png" class="plus_minus_button">
+          <div class="plus_detect"></div>
+          <div class="minus_detect"></div>
+          <div class="meal_count">
+            <p>1</p>
+          </div>
+          <div class="meal_money">
+            <p>100</p>
+          </div>
+        </div>
+        -->
+      </div>
+      <div style="width:100%;height:10vh;background:#727779;position:relative; bottom:0;">
+        <div class="container-fluid">
+          <img src="/media/source/TOTAL-01.png" id="total_money_image">
+          <img src="/media/source/CHECK-01.png" id="total_check_button" >
+          <div id="total_money">
+            <p style="font-size:10vw">0</p>  
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+    <div id="profile_side" style="height:100vh;position:fixed;top:0;left:0;width:100%;z-index:999;">
+      <img src="source/side/back.png" style="height:100%;position:absolute;top:0;left:0;z-index:1000">
+      <img src="source/side/user.png" style="width:68.561%;z-index:1001;position:absolute; top:0;">
+      <img src="source/side/more.png" style="height:5vh;z-index:1002;position:absolute;top:5vh;left:56%;">
+      <img src="source/side/order.png" style="width:68.561%;height:10%; position:absolute;top:14.75%;left:0;z-index:1001;margin-top:2%;">
+    </div>
+    -->
+    </body>
+</html>

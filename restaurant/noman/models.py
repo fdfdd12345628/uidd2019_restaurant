@@ -30,6 +30,9 @@ class order(models.Model):
     #store the string of multiple [special meal id]
     progress = models.IntegerField(blank=True)
     other = models.CharField(max_length=1000,blank=True)
+    QR_code = models.CharField(max_length = 100 , blank = True)
+    # record QR_code represent's string and change it to real QR code
+    # immediately
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     def __str__(self):
         return self.id

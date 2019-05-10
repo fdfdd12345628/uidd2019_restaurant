@@ -13,11 +13,10 @@
 </head>
 <body>
 		<h1 id="info">detect gesture</h1>
-
 </body>
 <script>
     $(document).hammer().on("tap press panleft panright ",function(ev){
 			$("#info").text( ev.type +" gesture detected.");
-});
+    });
 </script>
 </html>
