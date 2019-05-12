@@ -31,6 +31,8 @@ class order(models.Model):
     progress = models.IntegerField(blank=True)
     other = models.CharField(max_length=1000,blank=True)
     QR_code = models.CharField(max_length = 100 , blank = True)
+    create_time = models.CharField(max_length=100,blank=True)
+    total_money = models.IntegerField(blank = True)
     # record QR_code represent's string and change it to real QR code
     # immediately
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
