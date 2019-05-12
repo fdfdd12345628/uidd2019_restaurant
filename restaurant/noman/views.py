@@ -26,7 +26,15 @@ def set_order(order_name, nums,meal):
 
 def cart(request):
     if request.method =="GET":
-        return render(request,'cart.html')
+        content = {}
+        temp_data = []
+        owner = user.objects.get(id="2")
+        all_order = order.objects.filter(owner=owner)
+        for ele in all_order:
+            temp_data.append(ele)
+            print(ele.total_money)
+        content["order_data"]=temp_data
+        return render(request,'cart.html',content)
     if request.method == "POST":
         dic = json.loads(request.POST.get('meal','uuuu'))
         print(dic)
