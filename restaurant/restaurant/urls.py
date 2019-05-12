@@ -18,6 +18,7 @@ from noman.views import index,cart
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+from listManagement.views import list_management
 
 from noman.views import index
 urlpatterns = [
@@ -26,4 +27,5 @@ urlpatterns = [
     path('accounts/', include('user.urls')),
     path('cart/',cart),
     path('', index),
+    path('list_management', list_management),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL)

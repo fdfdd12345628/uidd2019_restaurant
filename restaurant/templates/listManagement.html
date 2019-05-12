@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    {% load static %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"> </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+    <link rel="stylesheet" href="{% static 'listStyle.css' %}">
+    <script src="{% static 'hammer.js' %}" ></script>
+    <script src="{% static 'jquery.hammer.js' %}" ></script>
+    <!--
+    <link rel="stylesheet" href="./listStyle.css">
+    <script src="./static/hammer.js"> </script>
+    <script src="./static/jquery.hammer.js"> </script>
+    -->
+    <title>List</title>
+  </head>
+  <body style="background-color: #262E31;height:100vh;position:fixed;">
+  <div id="goback">
+    <img class="listPageImg"  src="/media/img/listManagement/back_left.png" alt=" " >
+  </div>
+  <div id="progress">
+    <img class="listPageImg"  src="/media/img/listManagement/progress_01.png" alt=" ">
+  </div>
+  <div id="QRcodeField">
+    <div class="QRcodeSup"></div>
+    <div id="QRcode QRcodeSup">
+      <img class="listPageImg" src="/media/img/listManagement/QR_big.png" alt=" ">
+    </div>
+    <div class="QRcodeSup"></div>
+  </div>
+  <div id="list">
+    <img class="listPageImg" src="/media/img/listManagement/list_01.png" alt=" ">
+    <div id="listHeadField">
+      <div id="listHeadTotal">
+        <h1 id="headTotalPrice">635</h1>
+      </div>
+    </div>
+    <div id="listMenuField">
+      <div  class="listMenuElements">
+        <img class="listMenuImg" src="/media/img/listManagement/salmon_01.png" alt =" ">
+        <div class="listElementsAmount">
+          <h1 class="elementsAmount">01</h1>
+        </div>
+        <div class="listElementsPrice">
+          <h1 class="elementsPrice">100</h1>
+        </div>
+      </div>
+      <div  class="listMenuElements">
+        <img class="listMenuImg" src="/media/img/listManagement/hot_dog_01.png" alt =" ">
+        <div class="listElementsAmount">
+          <h1 class="elementsAmount">02</h1>
+        </div>
+        <div class="listElementsPrice">
+          <h1 class="elementsPrice">120</h1>
+        </div>
+      </div>
+      <div  class="listMenuElements">
+        <img class="listMenuImg" src="/media/img/listManagement/green_tea_01.png" alt =" ">
+        <div class="listElementsAmount">
+          <h1 class="elementsAmount">02</h1>
+        </div>
+        <div class="listElementsPrice">
+          <h1 class="elementsPrice">90</h1>
+        </div>
+      </div>
+      <div  class="listMenuElements">
+        <img class="listMenuImg" src="/media/img/listManagement/black_tea_01.png" alt =" ">
+        <div class="listElementsAmount">
+          <h1 class="elementsAmount">01</h1>
+        </div>
+        <div class="listElementsPrice">
+          <h1 class="elementsPrice">45</h1>
+        </div>
+      </div>
+      <div  class="listMenuElements">
+        <img class="listMenuImg" src="/media/img/listManagement/fish_stick_01.png" alt =" ">
+        <div class="listElementsAmount">
+          <h1 class="elementsAmount">01</h1>
+        </div>
+        <div class="listElementsPrice">
+          <h1 class="elementsPrice">80</h1>
+        </div>
+      </div>
+    </div>
+    <div id="listBottomField">
+      <div id="listBottomTotal">
+        <h1 id="bottomTotalPrice">635</h1>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'listMove.js' %}"></script>
+  </body>
+</html>
+

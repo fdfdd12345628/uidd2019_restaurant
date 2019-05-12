@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'noman',
     'user',
+    'listManagement',
 ]
 
 MIDDLEWARE = [

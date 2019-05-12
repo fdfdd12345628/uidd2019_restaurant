@@ -1,0 +1,191 @@
+body {
+    background-color: #262E31;
+    width: 100%;
+}
+
+.listPageImg {
+    height: 100%;
+    width: 100%;
+}
+
+#goback {
+    display: block;
+    z-index: 50;
+    position: absolute;
+    top: 2.75vh;
+    height: 4.34vh;
+    left: 5.8vw;
+    right: 89.5vw;
+}
+
+#progress {
+    display: block;
+    z-index: 50;
+    position: absolute;
+    top: 10vh;
+    height: 15vh;
+    left: 5.8vw;
+    right: 5.8vw;
+}
+
+#QRcodeField {
+    position: absolute;
+    top: 28.5vh;
+    left: 0vw;
+    height: 50vh;
+    width: 100%;
+    max-height: 50vh;
+    max-width: 100%;
+    margin: auto;
+    display: flex;
+    overflow: hidden;
+    flex-direction: row;
+    align-items: stretch;
+    z-index: 50;
+}
+
+.QRcodeSup {
+    height: 100%;
+    width: 33.33%;
+}
+
+#QRcode {
+    display: block;
+    z-index: 50;
+    position: absolute;
+    height: 50vh;
+    width: 50vh;
+}
+
+#list {
+    display: block;
+    z-index: 100;
+    position: absolute;
+    top: 83.25vh;
+    height: 86vh;
+    left: 6vw;
+    right: 6vw;
+}
+
+#listHeadField {
+    display: block;
+    position: absolute;
+    top: 0%;
+    height: 20%;
+    width: 90%;
+    left: 5%;
+    z-index: 200;
+    /* background-color: blue; */
+}
+
+#listMenuField {
+    display: block;
+    position: absolute;
+    top: 20%;
+    height: 69%;
+    left: 5%;
+    /* background-color: red; */
+    z-index: 150;
+}
+
+#listBottomField {
+    display: block;
+    position: absolute;
+    top: 89%;
+    left: 5%;
+    height: 11%;
+    width: 90%;
+    z-index: 200;
+    /* background-color: green; */
+}
+
+#listHeadTotal {
+    display: block;
+    position: absolute;
+    /* background-color: red; */
+    top: 17.5%;
+    left: 45%;
+    height: 82.5%;
+    width: 50%;
+    z-index: 200;
+    text-align: center;
+}
+
+#headTotalPrice {
+    color: black;
+    top: 10%;
+    height: 80%;
+    width: 100%;
+    font-size: 10vh;
+    z-index: 200;
+}
+
+.listMenuElements {
+    display: block;
+    position: relative;
+    height: 12vh;
+}
+
+.listMenuImg {
+    display: block;
+    position: relative;
+    top: 7.5%;
+    height: 85%;
+}
+
+.listElementsAmount {
+    /* background-color: red; */
+    display: block;
+    position: absolute;
+    top: 55%;
+    height: 45%;
+    left: 0%;
+    width: 12.5%;
+    text-align: center;
+    /* z-index: 175; */
+}
+
+.elementsAmount {
+    color: black;
+    top: 10%;
+    height: 80%;
+    width: 100%;
+    font-size: 4vh;
+}
+
+.listElementsPrice {
+    /* background-color: blue; */
+    display: block;
+    position: absolute;
+    left: 80%;
+    top: 50%;
+    height: 50%;
+    width: 35%;
+    text-align: center;
+    /* z-index: 175; */
+}
+
+.elementsPrice {}
+
+#listBottomTotal {
+    display: block;
+    position: absolute;
+    /* background-color: red; */
+    top: 17.5%;
+    left: 52.5%;
+    height: 82.5%;
+    width: 35%;
+    z-index: 200;
+    text-align: center;
+}
+
+#bottmTotalPrice {
+    color: black;
+    top: 10%;
+    height: 80%;
+    width: 100%;
+    font-size: 2vh;
+    z-index: 200;
+    /* line-height: 5vh; */
+    /* background-color: red; */
+}
