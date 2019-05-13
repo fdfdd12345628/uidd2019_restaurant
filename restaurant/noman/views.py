@@ -45,7 +45,7 @@ def cart(request):
         owner = user.objects.get(id="2")
         max_id = order.objects.all().order_by("-id")[0].id
         print(request.POST.get("money",""))
-        p = order.objects.create(id=max_id + 1, owner=owner, progress=1, meals=meal,total_money=request.POST.get("money",""))
+        p = order.objects.create(id=max_id + 1, owner=owner, progress=1, meals=meal,total_money=request.POST.get("money",""),create_time="2019.05.12_10.14")
         p.save()
         return JsonResponse({"order_num":max_id + 1})
 
@@ -60,8 +60,8 @@ meal_img={
     "cart_beef_01_tomato":"beef_01.png",
     "cart_beef_01_lemon":"beef_01.png",
     "cart_hotdog_01_honey":"hot_dog_01.png",
-    "cart_hotdog_01_honey":"hot_dog_01.png",
-    "cart_hotdog_01_honey":"hot_dog_01.png",
+    "cart_hotdog_01_tomato":"hot_dog_01.png",
+    "cart_hotdog_01_lemon":"hot_dog_01.png",
     "cart_blackTea_01":"black_tea_01.png",
     "cart_greenTea_01":"green_tea_01.png",
     "cart_fish_01":"fish_01.png",
