@@ -495,16 +495,19 @@ function show_profile(){
 $(function(){
 $("#total_check_button").on("click",function(){
   console.log(meal_in_cart);
+  console.log(parseInt($("#total_money > p").text()))
     $.ajax({
        type: 'POST',
        url: '',
        data: {
           meal : JSON.stringify(meal_in_cart),
+          money : parseInt($("#total_money > p").text())
        },
        dataType: 'json',
        success: function(content){
-          console.log(content["meal"])
-          alert('success');
+            console.log(content["order_num"])
+           window.location.href="../list_management/"+content["order_num"]
+          //alert('success');
           },
     })
 })
