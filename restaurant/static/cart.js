@@ -122,6 +122,7 @@ $("#cart_back_button").on("click",function(){
     $("#cart_list").animate({"opacity":0,"left":"100vw"},300,function(){
       $("#cart_list").css("display","none");
       $("#cart_icon").css("display","block");
+        $("#temp_background").remove();
     });
     record_cart = 0;
   }

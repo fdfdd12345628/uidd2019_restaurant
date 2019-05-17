@@ -9,7 +9,12 @@ listHammer.on("tap", (e) => {
         $("#list").animate({ "top": "83.25vh" }, 300);
         listExpand = false;
     }
-})
+});
+
+let goBack = new Hammer(document.getElementById('goback'));
+goBack.on("tap", (e) => {
+    window.location.href = '../cart'
+});
 // listHammer.on("panup", (e) => {
 //     console.log(e);
 //     $("#list").animate({ "top": "28vh" }, 300);
