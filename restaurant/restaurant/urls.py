@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from noman.views import index,cart, payment, payment_complete
+from noman.views import index,cart, payment, payment_complete, list_management
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
@@ -27,6 +27,6 @@ urlpatterns = [
     path('cart/payment/', payment, name='payment'),
     path('cart/payment/payment_complete/', payment_complete, name='pay_complete'),
     path('cart/',cart),
-
+    path('list_management/<int:id_num>', list_management),
     path('', index),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL)

@@ -189,13 +189,26 @@
         </div>
       </div>
     </div>
-    <!--
-    <div id="profile_side" style="height:100vh;position:fixed;top:0;left:0;width:100%;z-index:999;">
-      <img src="source/side/back.png" style="height:100%;position:absolute;top:0;left:0;z-index:1000">
-      <img src="source/side/user.png" style="width:68.561%;z-index:1001;position:absolute; top:0;">
-      <img src="source/side/more.png" style="height:5vh;z-index:1002;position:absolute;top:5vh;left:56%;">
-      <img src="source/side/order.png" style="width:68.561%;height:10%; position:absolute;top:14.75%;left:0;z-index:1001;margin-top:2%;">
+    <div id="profile_side" >
+      <img src="/media/source/side/back.png" style="height:100%;width:68.561%;position:absolute;top:0;left:0;z-index:1000">
+      <img src="/media/source/side/user.png" style="width:68.561%;z-index:1001;position:absolute; top:0;">
+      <img src="/media/source/side/more.png" style="height:5vh;z-index:1002;position:absolute;top:5vh;left:56%;">
+        <div style="height: 95vh; position: absolute; top:14.7588%;z-index: 1001;width:68.561%; overflow:auto;">
+        {% for ele in order_data %}
+            <div id="side_order_each"
+                 style="width:100%;height:9.416% margin-top: 3%;position: relative;overflow:hidden;">
+          <img src="/media/source/side/order.png" style="width:100%;">
+          <div class="side_order_money"style="position: absolute; top:2%;left:31.5%; ">
+            <p style="font-size:10vw;position: absolute; top:0;display:inline-block;line-height: 1;font-weight:500;">{{ele.total_money}}</p>
+          </div>
+          <div class="side_order_time"style="position: absolute; bottom:25%;left:5.7%; ">
+            <p style="font-size:2.3vw;position: absolute; top:0;display:inline-block;line-height: 1;color:#898e90;font-weight:700;">{{ele.create_time}}</p>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
     </div>
-    -->
+
     </body>
 </html>

@@ -1,5 +1,6 @@
 var record_cart = 0;
 var detect_delete = 0;
+var record_profile = 0;
 var detect_delete_temp_id;
 var third_record =0;
 var third_record_id;
@@ -53,7 +54,7 @@ $("body").hammer().on("swipeleft",function(ev){
 $(function(){
 $(document).hammer({domEvents: true}).on("swipeleft",".meal_each,body",function(ev){
   if($(this).attr("id")=="body"){
-    if(record_cart==0){
+    if(record_cart==0 && record_profile ==0){
       $("#cart_icon").css("display","none");
       $("#cart_list").css({"display":"block"});
       $("#cart_list").animate({"opacity":1,"left":"20vw"},300);
@@ -62,6 +63,12 @@ $(document).hammer({domEvents: true}).on("swipeleft",".meal_each,body",function(
       $(".minus_detect").css("height",$(".plus_detect").width()+"px");
       record_cart =1;
       $("body").append("<div id='temp_background'style='height:100vh;width:100vw;position:absolute;top:0;left:0;background:black;opacity:0.3;z-index:99'></div>")
+    }else if(record_profile ==1){
+      $("#profile_side").animate({"opacity":0,"left":"-100vw"},300,function(){
+        $("#temp_background").remove();
+        $("#profile_side").css("display","none");
+        record_profile=0;
+      });
     }
   }else{
     if(detect_delete_temp_id == $(this).attr("id")){return;}
@@ -74,7 +81,6 @@ $(document).hammer({domEvents: true}).on("swipeleft",".meal_each,body",function(
     detect_delete_temp_id = $(this).attr("id");
     console.log(detect_delete_temp_id);
   }
-  console.log("over:"+detect_delete_temp_id+" & "+detect_delete);
 });
 });
 
@@ -96,7 +102,9 @@ $("body,#cart_field").hammer().on("swiperight",function(ev){
         detect_delete_temp_id="";
       }
     }else{
-      if(second_menu_record ==1){
+      if(ev.originalEvent.gesture.changedPointers[0].pageX-ev.originalEvent.gesture.deltaX < 0.1*$("body").width()){
+        show_profile();
+      }else if(second_menu_record ==1){
         goback();
       }
     }
@@ -114,6 +122,7 @@ $("#cart_back_button").on("click",function(){
     $("#cart_list").animate({"opacity":0,"left":"100vw"},300,function(){
       $("#cart_list").css("display","none");
       $("#cart_icon").css("display","block");
+        $("#temp_background").remove();
     });
     record_cart = 0;
   }
@@ -480,21 +489,26 @@ $(".meal_minus_detect").click(function(){
 });
 });
 function show_profile(){
-  console.log("trigger profile");
-}
+  $("#profile_side").css({"display":"block"});
+  $("#profile_side").animate({"opacity":1,"left":"0vw"},300);
+  $("body").append("<div id='temp_background'style='height:100vh;width:100vw;position:absolute;top:0;left:0;background:black;opacity:0.3;z-index:99'></div>")
+  record_profile = 1;}
 $(function(){
 $("#total_check_button").on("click",function(){
   console.log(meal_in_cart);
+  console.log(parseInt($("#total_money > p").text()))
     $.ajax({
        type: 'POST',
        url: '',
        data: {
           meal : JSON.stringify(meal_in_cart),
+          money : parseInt($("#total_money > p").text())
        },
        dataType: 'json',
        success: function(content){
-          console.log(content["meal"])
-          alert('success');
+            console.log(content["order_num"])
+           window.location.href="../list_management/"+content["order_num"]
+          //alert('success');
           },
     })
 })
