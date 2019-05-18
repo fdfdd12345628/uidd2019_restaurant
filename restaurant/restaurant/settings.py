@@ -28,8 +28,14 @@ ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'user.User'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
+}
 
-
+PAYPAL_CLIENT_ID='AeB1tgD4LL17oAvCE0QRXNRr1zMInpKNnvWcRUADWp4Y8FMZdlC5uPohcjyHJRrhNbU9iyvVqQZ7OaSU'
+PAYPAL_SECRET='********'
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'oauth2_provider',
+    'rest_framework',
     'noman',
     'user',
 ]
@@ -138,6 +146,8 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
 
+PAYPAL_OAUTH_API = 'https://api.sandbox.paypal.com/v1/oauth2/token/'
+PAYPAL_ORDER_API = 'https://api.sandbox.paypal.com/v2/checkout/orders/'
 
 try:
     from .local_settings import *

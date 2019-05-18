@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="paypal-button-container" style="height: 50vh; width: 50vh"></div>
+<script
+        src="https://www.paypal.com/sdk/js?client-id={{ paypal_id }}">
+</script>
+<script>
+    paypal.Buttons({
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '0.01'
+                    }
+                }]
+            });
+        },
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                alert('Transaction completed by ' + details.payer.name.given_name);
+                // Call your server to save the transaction
+
+                var result = fetch('{% url 'pay_complete' %}', {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        orderID: data.orderID
+                    })
+                }).catch((err)=>{
+                    alert('Transaction authentication failed on server side')
+                });
+
+                return result
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
+</body>
+</html>
