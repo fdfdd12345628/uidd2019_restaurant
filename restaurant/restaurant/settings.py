@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'noman',
     'user',
+
 ]
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -507,7 +507,7 @@ $("#total_check_button").on("click",function(){
        dataType: 'json',
        success: function(content){
             console.log(content["order_num"])
-           window.location.href="../list_management/"+content["order_num"]
+         window.location.href = "./payment/" + content["order_num"]
           //alert('success');
           },
     })
