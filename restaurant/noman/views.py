@@ -110,7 +110,7 @@ def payment(request, id_num=0):
     except:
         return HttpResponseRedirect(reverse_lazy('cart'))
     if current_order.progress >= 2:
-        return HttpResponseRedirect(reverse_lazy('list_management', id_num=id_num))
+        return HttpResponseRedirect(reverse_lazy('list_management', kwargs={'id_num': id_num}))
     context = {
         'paypal_id': PAYPAL_CLIENT_ID,
         'id': id_num,
