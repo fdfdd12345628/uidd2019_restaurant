@@ -14,8 +14,14 @@
         {{ form.as_p }}
         <button type="submit">Login</button>
     </form>
+    <form id="register-form" name="register" method="get">
+        <label for="register_username">Username:</label>
+        <input name="register_username"></input>
+        <label for="register_display_name">Display Name:</label>
+        <input name="register_display_name"></input>
+        <button id="register" type="submit">Register with WebAuthn</button>
+    </form>
     <br>
-    <button id="register">finger</button>
 <a href="{% url 'password_reset' %}">Forgot password?</a><br>
 <a href="{% url 'register' %}">Register</a>
 </body>

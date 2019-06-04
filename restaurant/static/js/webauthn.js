@@ -98,7 +98,11 @@ const didClickRegister = async (e) => {
     let assertionValidationResponse;
     try {
         assertionValidationResponse = await postNewAssertionToServer(newAssertionForServer);
+
     } catch (err) {
+        setTimeout(function () {
+            window.location.href = "../profile"
+        })
         return console.error("Server validation of credential failed:", err);
     }
 

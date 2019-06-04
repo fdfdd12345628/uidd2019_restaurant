@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from .forms import UserLoginForm, Register
 from restaurant import settings
 from django.http import JsonResponse
+from user.models import User
 import random,string,os
 import webauthn.webauthn as webauthn
 
@@ -65,9 +66,13 @@ def register(request):
         pass
 
 
+username = ""
 def webauthn_begin_activate(request):
-    username = request.POST.get('register_username')
-    display_name = request.POST.get('register_display_name')
+    # username = request.POST.get('username')
+    global username
+    username = request.POST.get('register_username', '')
+    display_name = request.POST.get('register_display_username')
+    print(username)
     rp_name = "localhost"
     challenge = generate_challenge(32)
     ukey = generate_ukey()
@@ -93,6 +98,7 @@ def webauthn_begin_activate(request):
 
 
 def webauthn_begin_assertion(request):
+
     username = request.POST.get('login_username')
     challenge = generate_challenge(32)
     user = User_T.objects.get(username=username)
@@ -111,8 +117,10 @@ def webauthn_begin_assertion(request):
     return JsonResponse(webauthn_assertion_options.assertion_dict)
 
 def verify_credential_info(request):
-    username = request.POST.get('username', '')
-    user = authenticate(request, username=username)
+    # user = authenticate(request, username=username)
+    global username
+    user = User.objects.get(username=username)
+
     login(request, user)
     return HttpResponseRedirect(reverse_lazy('profile'))
 
