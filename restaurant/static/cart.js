@@ -122,6 +122,7 @@ $("#cart_back_button").on("click",function(){
     $("#cart_list").animate({"opacity":0,"left":"100vw"},300,function(){
       $("#cart_list").css("display","none");
       $("#cart_icon").css("display","block");
+        $("#temp_background").remove();
     });
     record_cart = 0;
   }
@@ -162,7 +163,6 @@ $(document).on("click",".plus_detect",function(){
 });
 $(function(){
 $(document).on("click",".minus_detect",function(){
-  console.log("inin");
   $(this).parent().find(".plus_minus_button").attr("src","/media/source/--_-.png");
   setTimeout(function(){$(".plus_minus_button").attr("src","/media/source/+-_ini.png");},100);
   var current_num = parseInt($(this).parent().find(".meal_count > p").text());
@@ -175,7 +175,7 @@ $(document).on("click",".minus_detect",function(){
 });
 });
 function order(id){
-  buy(id,parseInt($("#"+id+"_total_count > p").text()));   
+  if(parseInt($("#"+id+"_total_count > p").text())>0){buy(id,parseInt($("#"+id+"_total_count > p").text()));}
       $("#back").animate({"width":"66.67vw"},300);
   setTimeout(function(){
     third_record=0;
@@ -195,13 +195,26 @@ function order(id){
       if(temp_array[i]=="")break;
       $("#"+temp_array[i]).animate({"top":parseInt($("#"+temp_array[i]).css("top").replace(/px/,""))-0.44983*$(window).width()+"px"},300);
     }
+    $("#"+id).find("p").text("0");
   },10);
+  if(parseInt($("#"+id+"_total_count > p").text())>0){
+    $("body").append(' <div class="sec" id="'+id+'_tmp" style="opacity:0.5;border:0.6vh white solid;border-radius: 3vh; display:block;z-index:50;position:absolute;top:'+$("#"+id).position().top+'px;height:74.7964vw;width:74vw;left:12.7vw; background:#262E31;">'+$("#"+id).html()+'</div>')
+    setTimeout(function(){
+        $("#"+id+"_tmp").animate({
+            height:0,
+            top:"100vh",
+            left:"100vw",
+        },200);
+        // a little wired
+    },5);
+    setTimeout(function(){$("#"+id+"_tmp").remove();},200);
+  }
 }
 function order_burger(id){
   if(parseInt($("#"+id+"_honey_count > p").text())>0){ buy(id+"_honey",parseInt($("#"+id+"_honey_count > p").text())); } 
   if(parseInt($("#"+id+"_tomato_count > p").text())>0){ buy(id+"_tomato",parseInt($("#"+id+"_tomato_count > p").text())); } 
   if(parseInt($("#"+id+"_lemon_count > p").text())>0){ buy(id+"_lemon",parseInt($("#"+id+"_lemon_count > p").text())); } 
-      $("#back").animate({"width":"66.67vw"},300);
+  $("#back").animate({"width":"66.67vw"},300);
   setTimeout(function(){
     third_record=0;
     $("#"+third_record_id).animate({
@@ -210,9 +223,9 @@ function order_burger(id){
     $("#"+third_record_id).find(".sec_bot").animate({"opacity":0},150,function(){
       $("#"+third_record_id).find(".sec_bot").attr("src","/media/source/100_01.png");
       $("#"+third_record_id).find(".sec_bot").css("bottom","0");
-      $(".sec_ord").remove();
-      $(".sec_plus").css({"display":"none"});
-      $(".sec_plus").animate({"display":"none"},300);
+      $("#"+id+"> .sec_ord").remove();
+      $("#"+id+"> .sec_plus").css({"display":"none"});
+      $("#"+id+"> .sec_plus").animate({"display":"none"},300);
       $("#"+third_record_id).find(".sec_bot").animate({"opacity":1},150);
     });
     var temp_array = move_burger[third_record_id].split(",");
@@ -223,6 +236,18 @@ function order_burger(id){
     $("body").css({"height":parseInt($("body").css("height").replace(/px/,""))-0.595668*$(window).width()+"px"});
     $("#"+id).find("p").text("0");
   },10);
+  if(parseInt($("#"+id+"_honey_count > p").text())+parseInt($("#"+id+"_tomato_count > p").text())+parseInt($("#"+id+"_lemon_count > p").text())>0){
+    $("body").append(' <div class="sec" id="'+id+'_tmp" style="opacity:0.5;border:0.6vh white solid;border-radius: 3vh; display:block;z-index:50;position:absolute;top:'+$("#"+id).position().top+'px;height:91.7775091vw;width:74vw;left:12.7vw; background:#262E31;">'+$("#"+id).html()+'</div>')
+    setTimeout(function(){
+        $("#"+id+"_tmp").animate({
+            height:0,
+            top:"100vh",
+            left:"100vw",
+        },200);
+        // a little wired
+    },5);
+    setTimeout(function(){$("#"+id+"_tmp").remove();},200);
+  }
 }
 function buy(id,count){
   if(record_cart ==0){
@@ -495,16 +520,19 @@ function show_profile(){
 $(function(){
 $("#total_check_button").on("click",function(){
   console.log(meal_in_cart);
+  console.log(parseInt($("#total_money > p").text()))
     $.ajax({
        type: 'POST',
        url: '',
        data: {
           meal : JSON.stringify(meal_in_cart),
+          money : parseInt($("#total_money > p").text())
        },
        dataType: 'json',
        success: function(content){
-          console.log(content["meal"])
-          alert('success');
+            console.log(content["order_num"])
+         window.location.href = "./payment/" + content["order_num"]
+          //alert('success');
           },
     })
 })

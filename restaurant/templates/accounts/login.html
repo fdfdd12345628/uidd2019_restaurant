@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+    {% load static %}
+    <script src="{% static 'js/base64.js' %}"></script>
+    <script src="{% static 'js/webauthn.js' %}"></script>
 </head>
 <body>
     <form method="POST">
@@ -11,7 +15,10 @@
         <button type="submit">Login</button>
     </form>
     <br>
+    <button id="register">finger</button>
 <a href="{% url 'password_reset' %}">Forgot password?</a><br>
 <a href="{% url 'register' %}">Register</a>
 </body>
 </html>
+<script>
+</script>

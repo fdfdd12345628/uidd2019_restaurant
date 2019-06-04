@@ -14,16 +14,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from noman.views import index,cart
+from noman.views import index, cart, payment, payment_complete, list_management
+from user.views import webauthn_begin_activate,webauthn_begin_assertion,verify_credential_info
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 
 from noman.views import index
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('index/',index, name='home'),
-    path('accounts/', include('user.urls')),
-    path('cart/',cart),
-    path('', index),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL)
+                  path('admin/', admin.site.urls),
+                  path('index/', index, name='home'),
+                  path('accounts/', include('user.urls')),
+                  path('cart/payment/<int:id_num>', payment, name='payment'),
+                  path('cart/payment/payment_complete/<int:id_num>', payment_complete, name='pay_complete'),
+                  path('cart/', cart, name='cart'),
+                  path('list_management/<int:id_num>', list_management, name='list_management'),
+
+                  path("webauthn_begin_activate", webauthn_begin_activate),
+                  path("webauthn_begin_assertion", webauthn_begin_assertion),
+                  path("verify_credential_info", verify_credential_info),
+                  path('', index),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL)
