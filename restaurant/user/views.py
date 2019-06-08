@@ -6,13 +6,14 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from .forms import UserLoginForm, Register
 from restaurant import settings
+# from restaurant.user.models import User
 
 
 def login_user(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('profile'))
-        return render(request, 'accounts/login.html', {'form':UserLoginForm})
+        return render(request, 'accounts/login.html', {'form': UserLoginForm})
         pass
     elif request.method == 'POST':
         username = request.POST['username']
@@ -36,7 +37,7 @@ def logout_user(request):
 def profile(request):
     user = request.user
     return render(request, 'accounts/profile.html', {
-        'request':request,
+        'request': request,
 
     })
 
@@ -45,15 +46,11 @@ def register(request):
     if request.method == 'GET':
         return render(request, 'accounts/register.html', {
             'form': Register,
-            'request':request,
+            'request': request,
         })
         pass
-    if request.method=='POST':
-        f = Register(request.POST)
-
-        if f.is_valid():
-            f.save()
-            return HttpResponseRedirect(reverse_lazy('login'))
-        else:
-            return HttpResponseRedirect(reverse_lazy('register'))
-        pass
+    if request.method == 'POST':
+        username = request.POST['phone']
+        email = request.POST['email']
+        password = request.POST['password']
+        return HttpResponse(username+'/'+email+'/'+password)
