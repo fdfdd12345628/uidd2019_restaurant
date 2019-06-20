@@ -45,9 +45,19 @@ def cart(request):
         dic = json.loads(request.POST.get('meal', ''))
         print(dic)
         meal = ""
-        for key, value in dic.items():
+        bulk = []
+        max_meal_id = special_meal.objects.all().order_by("-id")[0].id
+        print(max_meal_id)
+        for i, (key, value) in enumerate(dic.items()):
             print("{} {}".format(key, value))
-            meal = set_order(key, value, meal)
+            # meal = set_order(key, value, meal)
+            if (meal != ""):
+                meal = meal + "," + str(max_meal_id + 1)
+            else:
+                meal = str(max_meal_id + 1)
+            select_meal = Meal.objects.get(name=key)
+            bulk.append(special_meal(id=max_meal_id + i + 1, meal_id=select_meal, number=value))
+        special_meal.objects.bulk_create(bulk)
         owner = User.objects.get(id="2")
         max_id = order.objects.all().order_by("-id")[0].id
         print(request.POST.get("money", ""))
