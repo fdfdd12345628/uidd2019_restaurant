@@ -48,12 +48,6 @@ def set_order(order_name, nums, meal):
     select_meal.save()
     return meal
 
-
-
-
-
-
-
 def cart(request):
     if request.method == "GET":
         content = {}

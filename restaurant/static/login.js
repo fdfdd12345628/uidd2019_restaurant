@@ -47,3 +47,12 @@ forgotBtnHammer.on("tap", (e) => {
 fingerBtnHammer.on("tap", (e) => {
     console.log("fingerBtn tapped");
 })
+document.addEventListener('DOMContentLoaded',function() {
+    document.querySelector("#loginUsername").onchange=check;
+},false);
+
+function check(event) {
+    console.log(event.target.value)
+    $("#register_display_name").val(event.target.value)
+    $("#register_username").val(event.target.value)
+}

@@ -320,5 +320,6 @@ const postAssertionToServer = async (assertionDataForServer) => {
 
 
 document.addEventListener("DOMContentLoaded", e => {
-    document.querySelector('#register').addEventListener('click', didClickRegister);
+    console.log($("#register_username").val());
+    document.querySelector('#fingerBtnImg').addEventListener('click', didClickRegister);
 });
