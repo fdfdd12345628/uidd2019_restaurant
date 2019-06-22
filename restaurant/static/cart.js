@@ -13,7 +13,8 @@ var move_burger={
   "blackTea_01":"",
   "fish_01":"fries_01",
   "fries_01":"",
-  "favor_order_1":""
+  "favor_order_1":"",
+  "":""
 }
 var meal_money={
   "duck_01":100,
@@ -30,21 +31,26 @@ var money={
   "cart_duck_01_honey":100,
   "cart_duck_01_tomato":100,
   "cart_duck_01_lemon":100,
+  "cart_duck_01":100,
   "cart_salmon_01_honey": 100,
   "cart_salmon_01_tomato": 100,
   "cart_salmon_01_lemon": 100,
+  "cart_salmon_01": 100,
   "cart_beef_01_honey": 100,
   "cart_beef_01_tomato": 100,
   "cart_beef_01_lemon": 100,
+  "cart_beef_01": 100,
   "cart_hotdog_01_honey":100,
   "cart_hotdog_01_tomato":100,
   "cart_hotdog_01_lemon":100,
+  "cart_hotdog_01":100,
   "cart_blackTea_01": 45,
   "cart_greenTea_01": 45,
   "cart_fish_01": 80,
   "cart_fries_01":60
 }
 var favor_order_list=[]
+var meal_in_cart={}
 $(function(){
 $("#cart_icon").on("click",function(){
   console.log("aaaa");
@@ -164,40 +170,40 @@ $(document).on("click",".minus_detect",function(){
 });
 });
 function order(id){
-  if(parseInt($("#"+id+"_total_count > p").text())>0){buy(id,parseInt($("#"+id+"_total_count > p").text()));}
+    if(parseInt($("#"+id+"_total_count > p").text())>0){buy(id,parseInt($("#"+id+"_total_count > p").text()));}
       $("#back").animate({"width":"66.67vw"},300);
-  setTimeout(function(){
-    third_record=0;
-    $("#"+third_record_id).animate({
-      height:"32.2107vw",
-    },300);
-    $("#"+third_record_id).find(".sec_bot").animate({"opacity":0},150,function(){
-      $("#"+third_record_id).find(".sec_bot").attr("src","/media/source/100_01.png");
-      $("#"+third_record_id).find(".sec_bot").css("bottom","0");
-      $(".sec_ord").remove();
-      $(".sec_plus").css({"display":"none"});
-      $(".sec_plus").animate({"display":"none"},300);
-      $("#"+third_record_id).find(".sec_bot").animate({"opacity":1},150);
-    });
-    var temp_array = move_burger[third_record_id].split(",");
-    for(var i =0; i<temp_array.length;i++){
-      if(temp_array[i]=="")break;
-      $("#"+temp_array[i]).animate({"top":parseInt($("#"+temp_array[i]).css("top").replace(/px/,""))-0.44983*$(window).width()+"px"},300);
-    }
-    $("#"+id).find("p").text("0");
-  },10);
-  if(parseInt($("#"+id+"_total_count > p").text())>0){
-    $("body").append(' <div class="sec" id="'+id+'_tmp" style="opacity:0.5;border:0.6vh white solid;border-radius: 3vh; display:block;z-index:50;position:absolute;top:'+$("#"+id).position().top+'px;height:74.7964vw;width:74vw;left:12.7vw; background:#262E31;">'+$("#"+id).html()+'</div>')
     setTimeout(function(){
-        $("#"+id+"_tmp").animate({
-            height:0,
-            top:"100vh",
-            left:"100vw",
-        },200);
-        // a little wired
-    },5);
-    setTimeout(function(){$("#"+id+"_tmp").remove();},200);
-  }
+        third_record=0;
+        $("#"+third_record_id).animate({
+          height:"32.2107vw",
+        },300);
+        $("#"+third_record_id).find(".sec_bot").animate({"opacity":0},150,function(){
+        $("#"+third_record_id).find(".sec_bot").attr("src","/media/source/100_01.png");
+        $("#"+third_record_id).find(".sec_bot").css("bottom","0");
+        $(".sec_ord").remove();
+        $(".sec_plus").css({"display":"none"});
+        $(".sec_plus").animate({"display":"none"},300);
+        $("#"+third_record_id).find(".sec_bot").animate({"opacity":1},150);
+        });
+        var temp_array = move_burger[third_record_id].split(",");
+        for(var i =0; i<temp_array.length;i++){
+        if(temp_array[i]=="")break;
+        $("#"+temp_array[i]).animate({"top":parseInt($("#"+temp_array[i]).css("top").replace(/px/,""))-0.44983*$(window).width()+"px"},300);
+        }
+        $("#"+id).find("p").text("0");
+    },10);
+    if(parseInt($("#"+id+"_total_count > p").text())>0){
+        $("body").append(' <div class="sec" id="'+id+'_tmp" style="opacity:0.5;border:0.6vh white solid;border-radius: 3vh; display:block;z-index:50;position:absolute;top:'+$("#"+id).position().top+'px;height:74.7964vw;width:74vw;left:12.7vw; background:#262E31;">'+$("#"+id).html()+'</div>')
+        setTimeout(function(){
+            $("#"+id+"_tmp").animate({
+                height:0,
+                top:"100vh",
+                left:"100vw",
+            },200);
+            // a little wired
+        },5);
+        setTimeout(function(){$("#"+id+"_tmp").remove();},200);
+    }
 }
 function order_burger(id){
   if(parseInt($("#"+id+"_honey_count > p").text())>0){ buy(id+"_honey",parseInt($("#"+id+"_honey_count > p").text())); } 
@@ -344,7 +350,7 @@ function third_burger(id){
       $("#"+id).find(".sec_bot").attr("src","/media/source/100_02.png");
       $("#"+id).find(".sec_plus").css({"display":"block"});
       $("#"+id).find(".sec_bot").css("bottom","13%");
-      $("#"+id).append("<img class='sec_ord' src='/media/source/order-01.png' onclick='order_burger(\""+id+"\")'style='width:100%; z-index:51; position:absolute; bottom:0;left:0'>")
+      $("#"+id).append("<img class='sec_ord' src='/media/source/order-01.png' onclick='order_burger(\""+id+"\",1)'style='width:100%; z-index:51; position:absolute; bottom:0;left:0'>")
         $("#"+id).find(".sec_bot").animate({"opacity":1},150);
     });
     var temp_array = move_burger[id].split(",");
@@ -380,7 +386,6 @@ function third_burger(id){
 }
 
 function third_favor(id,money){
-    console.log("favor")
   if(third_record ==0){
     $("#back").animate({"width":"100vw"},200);
     third_record=1;
@@ -391,7 +396,8 @@ function third_favor(id,money){
     },300);
     $("#"+id).find(".sec_bot").animate({"opacity":0},150,function(){
       $("#"+id).find(".sec_bot").attr("src","/media/img/favor/order.png");
-        $("#"+id).find(".sec_bot").animate({"opacity":1},150);
+      $("#"+id).find(".sec_bot").animate({"opacity":1},150);
+      $("#"+id).find(".sec_bot").attr({"onclick":"favor_order('"+id+"')"},150);
     });
     var RecordFavorList = 0;
     for(var i =0; i<favor_order_list.length;i++){
@@ -404,6 +410,7 @@ function third_favor(id,money){
     return;
   }else{
     if(id != third_record_id){
+        console.log(id)
       setTimeout(function(){third_favor(id,money)},330);
       third_record=0;
       $("#"+third_record_id).animate({
@@ -412,9 +419,7 @@ function third_favor(id,money){
       $("#"+third_record_id).find(".sec_bot").animate({"opacity":0},150,function(){
         $("#"+third_record_id).find(".sec_bot").attr("src","/media/source/"+money+"_01.png");
         $("#"+third_record_id).find(".sec_bot").css("bottom","0");
-        $(".sec_ord").remove();
-        $(".sec_plus").css({"display":"none"});
-        $(".sec_plus").animate({"display":"none"},300);
+        $(".sec_bot").removeAttr("onclick");
         $("#"+third_record_id).find(".sec_bot").animate({"opacity":1},150);
       });
       $("#"+third_record_id+"> .list").css("display","none")
@@ -426,13 +431,6 @@ function third_favor(id,money){
           if(favor_order_list[i] == third_record_id) RecordFavorList = 1
         }
       }
-      /*
-      var temp_array = move_burger[third_record_id].split(",");
-      for(var i =0; i<temp_array.length;i++){
-        if(temp_array[i]=="")break;
-        $("#"+temp_array[i]).animate({"top":parseInt($("#"+temp_array[i]).css("top").replace(/px/,""))-0.44983*$(window).width()+"px"},300);
-      }
-      */
     }
   }
 }
@@ -448,7 +446,7 @@ function third_other(id,money){
       $("#"+id).find(".sec_bot").attr("src","/media/source/"+money+"_02.png");
       $("#"+id).find(".sec_plus").css({"display":"block"});
       $("#"+id).find(".sec_bot").css("bottom","13%");
-      $("#"+id).append("<img class='sec_ord' src='/media/source/order-01.png'onclick='order(\""+id+"\")' style='width:100%; z-index:51; position:absolute; bottom:0;left:0'>")
+      $("#"+id).append("<img class='sec_ord' src='/media/source/order-01.png'onclick='order(\""+id+"\",1)' style='width:100%; z-index:51; position:absolute; bottom:0;left:0'>")
         $("#"+id).find(".sec_bot").animate({"opacity":1},150);
     });
     var temp_array = move_burger[id].split(",");
@@ -517,6 +515,7 @@ $(".sec_top").click(function(){
         },300);
         $("#"+third_record_id+" > .list").animate({"opacity":0},300,function(){
           $("#"+third_record_id).find(".sec_bot").attr("src","/media/img/favor/list_bottom.png");
+          $("#"+third_record_id).find(".sec_bot").removeAttr("onclick");
           $("#"+third_record_id+" > .list").css({"display":"none","opacity":1});
         });
         var RecordFavorList = 0;
@@ -608,4 +607,3 @@ $("#total_check_button").on("click",function(){
     }
 })
 });
-
