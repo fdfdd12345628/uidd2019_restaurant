@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from .forms import UserLoginForm, Register
 from restaurant import settings
+from .models import User
 # from restaurant.user.models import User
 
 
@@ -53,4 +54,8 @@ def register(request):
         username = request.POST['phone']
         email = request.POST['email']
         password = request.POST['password']
-        return HttpResponse(username+'/'+email+'/'+password)
+        if password == request.POST['passwordcheck']:
+            User.objects.create_user(username, email, password)
+            return HttpResponse(username+'/'+email+'/'+password)
+        else:
+            return HttpResponse('please retype your password')
