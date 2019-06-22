@@ -12,13 +12,12 @@
 <p>you can use test paypal account</p>
 <p>username:fdfdd12345628-buyer@gmail.com</p>
 <p>password:12345678</p>
-<div id="paypal-button-container" style="height: 50vh; width: 50vh"></div>
+<div id="paypal-button-container"></div>
 <script
         src="https://www.paypal.com/sdk/js?client-id={{ paypal_id }}">
 </script>
 <script>
     paypal.Buttons({
-
         createOrder: function (data, actions) {
             return actions.order.create({
                 purchase_units: [{

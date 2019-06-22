@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+    {% load static %}
+    <script src="{% static 'js/base64.js' %}"></script>
+    <script src="{% static 'js/webauthn.js' %}"></script>
 </head>
 <body>
     <form method="POST">
@@ -10,8 +14,17 @@
         {{ form.as_p }}
         <button type="submit">Login</button>
     </form>
+    <form id="register-form" name="register" method="get">
+        <label for="register_username">Username:</label>
+        <input name="register_username"></input>
+        <label for="register_display_name">Display Name:</label>
+        <input name="register_display_name"></input>
+        <button id="register" type="submit">Register with WebAuthn</button>
+    </form>
     <br>
 <a href="{% url 'password_reset' %}">Forgot password?</a><br>
 <a href="{% url 'register' %}">Register</a>
 </body>
 </html>
+<script>
+</script>

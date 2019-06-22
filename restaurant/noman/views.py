@@ -11,6 +11,25 @@ from django.apps import apps
 from restaurant.settings import PAYPAL_CLIENT_ID, PAYPAL_OAUTH_API, PAYPAL_ORDER_API, PAYPAL_SECRET
 
 
+meal_img = {
+    "cart_duck_01_honey": "duck_01.png",
+    "cart_duck_01_tomato": "duck_01.png",
+    "cart_duck_01_lemon": "duck_01.png",
+    "cart_salmon_01_honey": "salmon_01.png",
+    "cart_salmon_01_tomato": "salmon_01.png",
+    "cart_salmon_01_lemon": "salmon_01.png",
+    "cart_beef_01_honey": "beef_01.png",
+    "cart_beef_01_tomato": "beef_01.png",
+    "cart_beef_01_lemon": "beef_01.png",
+    "cart_hotdog_01_honey": "hot_dog_01.png",
+    "cart_hotdog_01_tomato": "hot_dog_01.png",
+    "cart_hotdog_01_lemon": "hot_dog_01.png",
+    "cart_blackTea_01": "black_tea_01.png",
+    "cart_greenTea_01": "green_tea_01.png",
+    "cart_fish_01": "fish_01.png",
+    "cart_fries_01": "fries_01.png",
+}
+
 # Create your views here.
 def index(request):
     return render(request, "index.html")
@@ -35,11 +54,50 @@ def cart(request):
         content = {}
         temp_data = []
         owner = User.objects.get(id="2")
-        all_order = order.objects.filter(owner=owner)
-        for ele in all_order:
+        #sidebar data
+        for ele in order.objects.filter(owner=owner, progress__lte=2):
             temp_data.append(ele)
-            print(ele.total_money)
         content["order_data"] = temp_data
+        #favor data
+        order_data_list=[]
+        for each_order in order.objects.filter(owner = owner , favor =1):
+            #get every favor order
+            temp_content = {}
+            # each order data in dict
+            temp_content["money"] = each_order.total_money
+            temp_content["progress"] = each_order.progress
+            # 其實可以不用
+            temp_content["burger"] =0
+            temp_content["drink"] =0
+            temp_content["snack"] =0
+            meals_list = each_order.meals.split(",")
+            temp_list = []
+            exist_list = []
+            for ele in meals_list:
+                temp_spmeal = special_meal.objects.get(id=ele)
+                temp_meal = Meal.objects.get(special_meal__id=ele)
+                # below is counting category
+                if temp_meal.category == 1:
+                    temp_content["burger"]+=1
+                elif temp_content.category ==2:
+                    temp_content["drink"]+=1
+                else:
+                    temp_content["snack"]+=2
+                if meal_img[temp_meal.name] not in exist_list:
+                    temp_list.append({
+                        "image": meal_img[temp_meal.name],
+                        "number": temp_spmeal.number,
+                        "money": temp_spmeal.number *temp_meal.money},
+                    )
+                    exist_list.append(meal_img[temp_meal.name])
+                else:
+                    for m in temp_list:
+                        if m["image"] == meal_img[temp_meal.name]:
+                            m["number"] += temp_spmeal.number
+                            break
+            temp_content["detail"] = temp_list
+            order_data_list.append(temp_content)
+        content['favor_order'] = order_data_list
         return render(request, 'cart.html', content)
     if request.method == "POST":
         dic = json.loads(request.POST.get('meal', ''))
@@ -67,25 +125,6 @@ def cart(request):
         return JsonResponse({"order_num": max_id + 1})
 
 
-meal_img = {
-    "cart_duck_01_honey": "duck_01.png",
-    "cart_duck_01_tomato": "duck_01.png",
-    "cart_duck_01_lemon": "duck_01.png",
-    "cart_salmon_01_honey": "salmon_01.png",
-    "cart_salmon_01_tomato": "salmon_01.png",
-    "cart_salmon_01_lemon": "salmon_01.png",
-    "cart_beef_01_honey": "beef_01.png",
-    "cart_beef_01_tomato": "beef_01.png",
-    "cart_beef_01_lemon": "beef_01.png",
-    "cart_hotdog_01_honey": "hot_dog_01.png",
-    "cart_hotdog_01_tomato": "hot_dog_01.png",
-    "cart_hotdog_01_lemon": "hot_dog_01.png",
-    "cart_blackTea_01": "black_tea_01.png",
-    "cart_greenTea_01": "green_tea_01.png",
-    "cart_fish_01": "fish_01.png",
-    "cart_fries_01": "fries_01.png",
-}
-
 
 def list_management(request, id_num):
     user_order = order.objects.get(id=id_num)
@@ -97,16 +136,17 @@ def list_management(request, id_num):
     exist_list = []
     for ele in meals_list:
         temp_spmeal = special_meal.objects.get(id=ele)
-        if meal_img[Meal.objects.get(special_meal__id=ele).name] not in exist_list:
+        temp_meal = Meal.objects.get(special_meal__id=ele)
+        if meal_img[temp_meal.name] not in exist_list:
             temp_list.append({
-                "image": meal_img[Meal.objects.get(special_meal__id=ele).name],
+                "image": meal_img[temp_meal.name],
                 "number": temp_spmeal.number,
-                "money": temp_spmeal.number * Meal.objects.get(special_meal__id=ele).money},
+                "money": temp_spmeal.number * temp_meal.money},
             )
-            exist_list.append(meal_img[Meal.objects.get(special_meal__id=ele).name])
+            exist_list.append(meal_img[temp_meal.name])
         else:
             for m in temp_list:
-                if m["image"] == meal_img[Meal.objects.get(special_meal__id=ele).name]:
+                if m["image"] == meal_img[temp_meal.name]:
                     m["number"] += temp_spmeal.number
                     break
     content["detail"] = temp_list
@@ -115,20 +155,42 @@ def list_management(request, id_num):
 
 
 def payment(request, id_num=0):
-    try:
-        current_order = order.objects.get(pk=id_num)
-    except:
-        return HttpResponseRedirect(reverse_lazy('cart'))
-    if current_order.progress >= 2:
-        return HttpResponseRedirect(reverse_lazy('list_management', kwargs={'id_num': id_num}))
-    context = {
-        'paypal_id': PAYPAL_CLIENT_ID,
-        'id': id_num,
-        'money': current_order.total_money
-    }
-
-    return render(request, 'payment/payment.html', context)
-    pass
+    if request.method=="GET":
+        try:
+            current_order = order.objects.get(pk=id_num)
+        except:
+            return HttpResponseRedirect(reverse_lazy('cart'))
+        if current_order.progress >= 2:
+            return HttpResponseRedirect(reverse_lazy('list_management', kwargs={'id_num': id_num}))
+        context = {
+            'paypal_id': PAYPAL_CLIENT_ID,
+            'id': id_num,
+            'money': current_order.total_money
+        }
+        user_order = order.objects.get(id=id_num)
+        context["money"] = user_order.total_money
+        context["progress"] = user_order.progress
+        meals_list = user_order.meals.split(",")
+        temp_list = []
+        exist_list = []
+        for ele in meals_list:
+            temp_spmeal = special_meal.objects.get(id=ele)
+            temp_meal = Meal.objects.get(special_meal__id=ele)
+            if meal_img[temp_meal.name] not in exist_list:
+                temp_list.append({
+                    "image": meal_img[temp_meal.name],
+                    "number": temp_spmeal.number,
+                    "money": temp_spmeal.number * temp_meal.money},
+                )
+                exist_list.append(meal_img[temp_meal.name])
+            else:
+                for m in temp_list:
+                    if m["image"] == meal_img[temp_meal.name]:
+                        m["number"] += temp_spmeal.number
+                        break
+        context["detail"] = temp_list
+        print(temp_list)
+        return render(request, 'pay.html', context)
 
 
 def payment_complete(request, id_num=0):
@@ -147,12 +209,12 @@ def payment_complete(request, id_num=0):
         }, data={
             'grant_type': 'client_credentials'
         })
-        # print(auth.text)
-        # print(auth.status_code)
+        print(auth.text)
+        print(auth.status_code)
         if auth.status_code != 200:
             return HttpResponse('internal server error', status=500)
-        # print(auth.json()['access_token'])
-        # print(request.body)
+        print(auth.json()['access_token'])
+        print(request.body)
         body = json.loads(request.body)
         print(body)
         details = requests.get(PAYPAL_ORDER_API + body['orderID'], headers={
@@ -177,3 +239,8 @@ def payment_complete(request, id_num=0):
         if current_order.progress >= 2:
             return HttpResponseRedirect(reverse_lazy('list_management', kwargs={'id_num': id_num}))
         return HttpResponseRedirect(reverse_lazy('payment', kwargs={'id_num': id_num}))
+
+
+def pay(request,id_num):
+    content = {}
+    return render(request,"pay.html",content)
