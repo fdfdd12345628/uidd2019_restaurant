@@ -38,5 +38,5 @@ class order(models.Model):
     # immediately
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     def __str__(self):
-        return self.id
+        return str(self.id)
 
