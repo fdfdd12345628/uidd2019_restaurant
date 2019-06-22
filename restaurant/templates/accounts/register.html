@@ -1,14 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
+    {% load static %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+    <script src="{% static 'hammer.js' %}"></script>
+    <script src="{% static 'jquery.hammer.js' %}"></script>
     <title>register</title>
 </head>
-<body>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
+<body style="background-color: #262E31;height:100vh;position:fixed;">
+<div id="registerBck">
+    <div id="registerTop">
+        <div class="registerTopSup"></div>
+        <div class="registerTopSup" id="carField">
+            <div class="carFieldSup"></div>
+            <div class="carFieldSup" id="carImgField">
+                <img id="carImg" src="/media/img/register/car.png" alt=" ">
+            </div>
+            <div class="carFieldSup"></div>
+        </div>
+        <div class="registerTopSup"></div>
+    </div>
+    <div id="registerMid">
+        <div class="registerMidSup"></div>
+        <div class="registerMidSup" id="registerField">
+            <div id="registerForm">
+                <div class="registerFormSup" id="registerFormPhone">
+                    <input type="tel" name="phone" id="registerPhone"
+                           style="margin-left:5%;margin-right:5%;width:90%;height:80%;background-color:transparent;border:none;color:#FFFFFF;font-size:100%;"/>
+                </div>
+                <div class="registerFormSup" id="registerFormEmail">
+                    <input type="email" name="email" id="registerEmail"
+                           style="margin-left:5%;margin-right:5%;width:90%;height:80%;background-color:transparent;border:none;color:#FFFFFF;font-size:100%;"/>
+                </div>
+                <div class="registerFormSup" id="registerFormPWrd">
+                    <input type="password" name="password" id="registerPWrd"
+                           style="margin-left:5%;margin-right:5%;width:90%;height:80%;background-color:transparent;border:none;color:#FFFFFF;font-size:100%;"/>
+                </div>
+                <div class="registerFormSup" id="registerFormPWrdCk">
+                    <input type="password" name="passwordcheck" id="registerPWrdCk"
+                           style="margin-left:5%;margin-right:5%; width:90%;height:80%;background-color:transparent;border:none;color:#FFFFFF;font-size:100%;"/>
+                </div>
+            </div>
+        </div>
+        <div class="registerMidSup"></div>
+    </div>
+    <div id="registerBot">
+        <div class="registerBotSup"></div>
+        <div class="registerBotSup" id="signupBtnField">
+            <div class="signupBtnSup"></div>
+            <div class="signupBtnSup" id="signupBtn">
+                <img id="signupBtnImg" src="/media/img/register/signup.png" alt=" ">
+            </div>
+            <div class="signupBtnSup"></div>
+            <div class="signupBtnSup"></div>
+        </div>
+        <div class="registerBotSup"></div>
+    </div>
+</div>
+<script src="{% static 'register.js' %}"></script>
 </body>
 </html>

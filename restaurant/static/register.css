@@ -1,0 +1,238 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    background-image: url(../media/img/register/hamburger.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+#registerBck {
+    display: flex;
+    z-index: 50;
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    height: 100vh;
+    width: 100vw;
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#registerTop {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    z-index: 50;
+    position: relative;
+    top: 0%;
+    left: 0%;
+    max-width: 100%;
+    max-height: 30%;
+    margin: auto;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#registerMid {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    z-index: 50;
+    position: relative;
+    top: 0%;
+    left: 0%;
+    max-width: 100%;
+    max-height: 40%;
+    margin: auto;
+    overflow: hidden;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+#registerBot {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    z-index: 50;
+    position: relative;
+    top: 0%;
+    left: 0%;
+    max-width: 100%;
+    max-height: 30%;
+    margin: auto;
+    overflow: hidden;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+/* register Top START */
+
+.registerTopSup {
+    width: 100%;
+    height: 25%;
+}
+
+#carField {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    z-index: 50;
+    position: relative;
+    top: 0%;
+    left: 0%;
+    max-width: 100%;
+    max-height: 50%;
+    margin: auto;
+    overflow: hidden;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.carFieldSup {
+    height: 100%;
+    width: 30%;
+}
+
+#carImgField {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    z-index: 50;
+    position: relative;
+    top: 0%;
+    left: 0%;
+    max-width: 40%;
+    max-height: 100%;
+    margin: auto;
+    overflow: hidden;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+#carImg {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* register Top END */
+
+/* register Mid START */
+
+.registerMidSup {
+    height: 100%;
+    width: 7.5%;
+}
+
+#registerField {
+    width: 85%;
+    height: 100%;
+    display: flex;
+    z-index: 50;
+    position: absolute;
+    top: 0%;
+    left: 7.5%;
+    max-width: 85%;
+    max-height: 100%;
+    margin: auto;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#registerForm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 50;
+    position: relative;
+    top: 0%;
+    left: 0%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.registerFormSup {
+    width: 100%;
+    height: 25%;
+}
+
+#registerFormPhone {
+    background-image: url(../media/img/register/phone.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    z-index: 50;
+}
+
+#registerFormEmail {
+    background-image: url(../media/img/register/mail.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    z-index: 50;
+}
+
+#registerFormPWrd {
+    background-image: url(../media/img/register/password.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    z-index: 50;
+}
+
+#registerFormPWrdCk {
+    background-image: url(../media/img/register/passwordcheck.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    z-index: 50;
+}
+
+/* register Mid END */
+
+/* register Bot START */
+
+.registerBotSup {
+    height: 100%;
+    width: 7.5%;
+}
+
+#signupBtnField {
+    width: 85%;
+    height: 100%;
+    display: flex;
+    z-index: 50;
+    position: absolute;
+    top: 0%;
+    left: 7.5%;
+    max-width: 85%;
+    max-height: 100%;
+    margin: auto;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.signupBtnSup {
+    height: 25%;
+    width: 100%;
+}
+
+#signupBtnImg {
+    display: block;
+    position: relative;
+    size: 100%;
+    height: 100%;
+    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/* register Bot END */

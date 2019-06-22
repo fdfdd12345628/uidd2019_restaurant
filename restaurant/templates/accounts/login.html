@@ -1,30 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <title>login</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
     {% load static %}
-    <script src="{% static 'js/base64.js' %}"></script>
-    <script src="{% static 'js/webauthn.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <script src="{% static 'hammer.js' %}"></script>
+    <script src="{% static 'jquery.hammer.js' %}"></script>
+    <title>login</title>
 </head>
-<body>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-    <form id="register-form" name="register" method="get">
-        <label for="register_username">Username:</label>
-        <input name="register_username"></input>
-        <label for="register_display_name">Display Name:</label>
-        <input name="register_display_name"></input>
-        <button id="register" type="submit">Register with WebAuthn</button>
-    </form>
-    <br>
-<a href="{% url 'password_reset' %}">Forgot password?</a><br>
-<a href="{% url 'register' %}">Register</a>
+<body style="background-color: #262E31;height:100vh;position:fixed;">
+<div id="loginBck">
+    <div id="loginTop">
+        <div class="loginTopSup"></div>
+        <div class="loginTopSup" id="carField">
+            <div class="carFieldSup"></div>
+            <div class="carFieldSup" id="carImgField">
+                <img id="carImg" src="/media/img/login/car.png" alt=" ">
+            </div>
+            <div class="carFieldSup"></div>
+        </div>
+        <div class="loginTopSup"></div>
+    </div>
+    <div id="loginMid">
+        <div class="loginMidSup"></div>
+        <div class="loginMidSup" id="loginField">
+            <div id="loginForm">
+                <div class="loginFormSup" id="loginFormUser">
+                    <input type="text" name="username" id="loginUsername"
+                           style="margin-left:5%;margin-right:5%;width:90%;height:90%;background-color:transparent;border:none;color:#FFFFFF;font-size:100%;">
+                </div>
+                <div class="loginFormSup" id="loginFormPWrd">
+                    <input type="password" name="password" id="loginPassword"
+                           style="margin-left:5%;margin-right:5%;width:90%;height:90%;background-color:transparent;border:none;color:#FFFFFF;font-size:100%;">
+                </div>
+                <div class="loginFormSup" id="loginFormBtn" style="background-color:transparent;"></div>
+            </div>
+        </div>
+        <div class="loginMidSup"></div>
+    </div>
+    <div id="loginBot">
+        <div class="loginBotSup"></div>
+        <div class="loginBotSup" id="realLoginBot">
+            <div class="realLoginBotSup"></div>
+            <div class="realLoginBotSup" id="loginBotBtnField">
+                <div id="specialBtnField">
+                    <div class="specialBtnSup"></div>
+                    <div id="signupBtn">
+                        <img id="signupBtnImg" src="/media/img/login/signup.png" alt=" ">
+                    </div>
+                    <div id="specialBtnSup"></div>
+                    <div id="forgotBtn">
+                        <img id="forgotBtnImg" src="/media/img/login/forgot.png" alt=" ">
+                    </div>
+                    <div class="specialBtnSup"></div>
+                </div>
+                <div id="fingerBtnField">
+                    <div class="fingerBtnSup"></div>
+                    <div class="fingerBtnSup" id="fingerBtn">
+                        <img id="fingerBtnImg" src="/media/img/login/finger.png" alt=" ">
+                    </div>
+                    <div class="fingerBtnSup"></div>
+                </div>
+            </div>
+            <div class="realLoginBotSup"></div>
+        </div>
+        <div class="loginBotSup"></div>
+    </div>
+</div>
+<script src="{% static 'login.js' %}"></script>
 </body>
 </html>
-<script>
-</script>
+

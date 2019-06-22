@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from .forms import UserLoginForm, Register
 from restaurant import settings
+from .models import User
+# from restaurant.user.models import User
 from django.http import JsonResponse
 from user.models import User
 import random,string,os
@@ -35,6 +37,7 @@ def login_user(request):
 
 
 def logout_user(request):
+
     logout(request)
     return HttpResponseRedirect(reverse_lazy('home'))
 
@@ -44,6 +47,7 @@ def profile(request):
     user = request.user
     return render(request, 'accounts/profile.html', {
         'request': request,
+
     })
 
 
@@ -55,14 +59,14 @@ def register(request):
         })
         pass
     if request.method == 'POST':
-        f = Register(request.POST)
-
-        if f.is_valid():
-            f.save()
-            return HttpResponseRedirect(reverse_lazy('login'))
+        username = request.POST['phone']
+        email = request.POST['email']
+        password = request.POST['password']
+        if password == request.POST['passwordcheck']:
+            User.objects.create_user(username, email, password)
+            return HttpResponse(username + '/' + email + '/' + password)
         else:
-            return HttpResponseRedirect(reverse_lazy('register'))
-        pass
+            return HttpResponse('please retype your password')
 
 
 username = ""

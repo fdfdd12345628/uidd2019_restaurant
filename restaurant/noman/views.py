@@ -54,8 +54,8 @@ def cart(request):
         content = {}
         temp_data = []
         owner = User.objects.get(id="2")
-        #sidebar data
-        for ele in order.objects.filter(owner=owner, progress__lte=2):
+        all_order = order.objects.filter(owner=owner, progress__lte=2)
+        for ele in all_order:
             temp_data.append(ele)
         content["order_data"] = temp_data
         #favor data
@@ -120,7 +120,7 @@ def cart(request):
         max_id = order.objects.all().order_by("-id")[0].id
         print(request.POST.get("money", ""))
         p = order.objects.create(id=max_id + 1, owner=owner, progress=1, meals=meal,
-                                 total_money=request.POST.get("money", ""), create_time="2019.05.12_10.14")
+                                 total_money=request.POST.get("money", ""), create_time="2019.05.12_10.14", favor=0)
         p.save()
         return JsonResponse({"order_num": max_id + 1})
 
