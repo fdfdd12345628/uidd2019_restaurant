@@ -1,13 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    {% load static %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <script src="{% static 'hammer.js' %}"></script>
+    <script src="{% static 'jquery.hammer.js' %}"></script>
+     <script src="{% static 'profile.js' %}"></script>
     <meta charset="UTF-8">
     <title>{{ request.user.username }}'s profile</title>
 </head>
-<body>
-        <p>Hello, {{ request.user.username }}</p>
-        <a href="{% url 'logout' %}">logout</a><br>
-        <a href="{% url 'home' %}">index</a><br>
-        <a href="{% url 'password_change' %}">change password</a>
+<body >
+    <img id="order_bag"  src="/media/img/profile/un-01.png" style="height: 22vh;z-index: 10;text-align: center;display:block">
+    <img id="finish" src="/media/img/profile/com-01.png" style="height: 22vh;z-index: 10;text-align: center;display: none">
+    <img id="set" src="/media/img/profile/set-01.png" style="height: 22vh;z-index: 10;text-align: center;display: none">
+
+
+
+
+     <div class="order_bag" style="overflow: hidden;width: 100vw";>
+        {% for  ele in content %}
+            <div class="order bg p1"  id="o-{{ forloop.counter }}" style="background-image:url('/media/img/profile/list2-01.png');height: 13vh;z-index: 20;top:0.625vh;left:0vw;" onclick="favor(this,1)">
+            <img class="progress" src="/media/img/profile/0-01.png" style="position: absolute;height: 2.2vh;left: 60vw;top:2.5vh">
+            <p class="money" style="color: white;font-size:4.44vh;top:-3vh;left:30vw;position: absolute">{{ ele.money }}</p>
+            <p class="burger" style="color: white;font-size:3vh;top:5.2vh;left:20vw;position: absolute;">{{ ele.burger }}</p>
+            <p class="drink" style="color: white;font-size:3vh;top:5.2vh;left:40vw;position: absolute">{{ ele.drink }}</p>
+            <p class="snack"style="color: white;font-size:3vh;top:5.2vh;left:62vw;position: absolute">{{ ele.snack }}</p>
+        </div>
+        <img class="favor_button" src="/media/img/profile/fa-01.png" id="f-{{ ele.favor_id }}" style="height:13vh;left:75vw;position: relative;display:none;top:-12.5vh;" >
+        <div class="bar p1" style="height:0.625vh;"></div>
+        {% endfor %}
+
+     </div>
+
+    <div class="finish" style="overflow: hidden;width: 100vw;display: none">
+    {% for ele in finisg_item %}
+         <div class="order bg p2"  id="o-{{ forloop.counter }}" style="background-image:url('/media/img/profile/list2-01.png');height: 13vh;z-index: 20;top:0.625vh;left:0vw;" onclick="favor(this,2)">
+            <img class="progress" src="/media/img/profile/1000-01.png" style="position: absolute;height: 2.2vh;left: 60vw;top:2.5vh">
+            <p class="money" style="color: white;font-size:4.44vh;top:-3vh;left:30vw;position: absolute">{{ ele.money }}</p>
+            <p class="burger" style="color: white;font-size:3vh;top:5.2vh;left:20vw;position: absolute;">{{ ele.burger }}</p>
+            <p class="drink" style="color: white;font-size:3vh;top:5.2vh;left:40vw;position: absolute">{{ ele.drink }}</p>
+            <p class="snack"style="color: white;font-size:3vh;top:5.2vh;left:62vw;position: absolute">{{ ele.snack }}</p>
+        </div>
+        <img class="favor_button2" src="/media/img/profile/fa-01.png" id="s-{{ ele.favor_id }}" style="height:13vh;left:75vw;position: relative;display:none;top:-12.5vh" >
+        <div class="bar" style="height:0.625vh;"></div>
+    {% endfor %}
+    </div>
+
+    <div class="set" style="overflow: hidden;width: 100vw;display: none">
+         <img class="setting" src="/media/img/profile/finger-01.png" style="width: 100vw;top: 0.625vh;">
+         <img class="setting" src="/media/img/profile/profile-01.png" style="width: 100vw;top: 0.625vh;">
+         <img class="setting" src="/media/img/profile/bind-01.png" style="width: 100vw;top: 0.625vh;">
+         <img class="setting" src="/media/img/profile/favor-01.png" style="width: 100vw;top: 0.625vh;">
+    </div>
+
+
+
+
+    <img id="slider" src="/media/img/profile/slider-01.png" style="position:fixed;top:98vh;width:34vw;z-index:100;left:0vw">
+    <img id="slider_1" src="/media/img/profile/bar-01.png" style="position:fixed;top:98vh;width:100vw;z-index: 10">
 </body>
 </html>

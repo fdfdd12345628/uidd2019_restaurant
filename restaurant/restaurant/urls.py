@@ -32,4 +32,6 @@ urlpatterns = [
                   path("webauthn_begin_assertion", webauthn_begin_assertion),
                   path("verify_credential_info", verify_credential_info),
                   path('', index),
+
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL)
