@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import login_user, logout_user, profile, register
+from .views import login_user, logout_user, profile, register,favor
 from django.contrib.auth import urls
 
 urlpatterns = [
@@ -9,4 +9,6 @@ urlpatterns = [
     path("register/", register, name='register'),
     path('', include(urls)),
     path('', login_user),
+    path('profile/favor',favor, name='favor')
+
 ]

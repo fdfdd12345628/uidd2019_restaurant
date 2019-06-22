@@ -30,11 +30,16 @@ def set_order(order_name, nums, meal):
     return meal
 
 
+
+
+
+
+
 def cart(request):
     if request.method == "GET":
         content = {}
         temp_data = []
-        owner = user.objects.get(id="2")
+        owner = User.objects.get(id="2")
         all_order = order.objects.filter(owner=owner, progress__lte=2)
         for ele in all_order:
             temp_data.append(ele)

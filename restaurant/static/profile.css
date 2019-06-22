@@ -1,0 +1,42 @@
+body{
+    background-image: url(/media/img/profile/底-01.png) ;
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.bg{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.p1{
+    /*display: none;*/
+}
+
+.p2{
+
+}
+.setting{
+
+}
+p{
+    font-family: monospace ;
+}
+.upper{
+    background-image: url("/media/img/profile/un-01.png");
+    height: 9.375vh;
+    z-index: 10;
+    background-size: cover;
+    background-position: center;
+}
+
+.order{
+    height: 15vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image:url("/media/img/profile/list2-01.png");
+    position: relative;
+    z-index: 20;
+}

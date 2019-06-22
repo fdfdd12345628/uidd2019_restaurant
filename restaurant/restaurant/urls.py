@@ -30,4 +30,6 @@ urlpatterns = [
                   path('cart/', cart, name='cart'),
                   path('list_management/<int:id_num>', list_management, name='list_management'),
                   path('', index),
+
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL)
