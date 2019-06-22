@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     {% load static %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script-->
+    <script src="{% static 'jquery.js'%}"></script>
+    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'menustyle.css' %}">
     <script src="{% static 'hammer.js' %}"></script>
     <script src="{% static 'jquery.hammer.js' %}"></script>
@@ -33,7 +35,7 @@
 
 <img class="sec" id="goback" onclick="goback()" src="/media/img/左返回.png" alt=" "
      style="display:none;z-index: 50;position: absolute;top:2.75vh;height:6vh;;left:5.8vw">
-<div class="sec" id="duck_01" onclick="third_burger(this.id)"
+<div class="sec burger" id="duck_01" onclick="third_burger(this.id)"
      style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:10.3vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
     <img class="sec_top" src="/media/source/duck_02.png" style="z-index:51;position:absolute;width:100%;top:0;left:0;">
     <img class="sec_bot" src="/media/source/100_01.png"
@@ -67,7 +69,7 @@
     <div class="sec_plus" id="duck_01_total_money" style="position:absolute; top:77.6%; left:80%;display:none;"><p>0</p>
     </div>
 </div>
-<div class="sec" id="beef_01" onclick="third_burger(this.id)"
+<div class="sec burger" id="beef_01" onclick="third_burger(this.id)"
      style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:33.7vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
     <img class="sec_top" src="/media/source/beef_02.png" style="z-index:51;position:absolute;width:100%;top:0;left:0;">
     <img class="sec_bot" src="/media/source/100_01.png"
@@ -101,7 +103,7 @@
     <div class="sec_plus" id="beef_01_total_money" style="position:absolute; top:77.6%; left:80%;display:none;"><p>0</p>
     </div>
 </div>
-<div class="sec" id="salmon_01" onclick="third_burger(this.id)"
+<div class="sec burger" id="salmon_01" onclick="third_burger(this.id)"
      style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:57.1vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
     <img class="sec_top" src="/media/source/salmon_02.png"
          style="z-index:51;position:absolute;width:100%;top:0;left:0;">
@@ -136,7 +138,7 @@
     <div class="sec_plus" id="salmon_01_total_money" style="position:absolute; top:77.6%; left:80%;display:none;"><p>
         0</p></div>
 </div>
-<div class="sec" id="hotdog_01" onclick="third_burger(this.id)"
+<div class="sec burger" id="hotdog_01" onclick="third_burger(this.id)"
      style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:80.5vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
     <img class="sec_top" src="/media/source/hotdog_02.png"
          style="z-index:51;position:absolute;width:100%;top:0;left:0;">
@@ -170,7 +172,7 @@
     <div class="sec_plus" id="hotdog_01_total_money" style="position:absolute; top:77.6%; left:80%;display:none;"><p>
         0</p></div>
 </div>
-<div class="sec" id="greenTea_01" onclick="third_other(this.id,45)"
+<div class="sec drink" id="greenTea_01" onclick="third_other(this.id,45)"
      style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:10.3vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
     <img class="sec_top" src="/media/source/greenTea_02.png"
          style="z-index:51;position:absolute;width:100%;top:0;left:0;">
@@ -188,7 +190,7 @@
     <div class="sec_plus" id="greenTea_01_total_money" style="position:absolute; top:73%; left:82%;display:none;"><p>
         0</p></div>
 </div>
-<div class="sec" id="blackTea_01" onclick="third_other(this.id,45)"
+<div class="sec drink" id="blackTea_01" onclick="third_other(this.id,45)"
      style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:33.7vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
     <img class="sec_top" src="/media/source/blackTea_02.png"
          style="z-index:51;position:absolute;width:100%;top:0;left:0;">
@@ -206,8 +208,7 @@
     <div class="sec_plus" id="blackTea_01_total_money" style="position:absolute; top:73%; left:82%;display:none;"><p>
         0</p></div>
 </div>
-</div>
-<div class="sec" id="fish_01" onclick="third_other(this.id,80)"
+<div class="sec snack" id="fish_01" onclick="third_other(this.id,80)"
      style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:10.3vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
     <img class="sec_top" src="/media/source/fish_02.png" style="z-index:51;position:absolute;width:100%;top:0;left:0;">
     <img class="sec_bot" src="/media/source/80_01.png" style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
@@ -224,7 +225,7 @@
     <div class="sec_plus" id="fish_01_total_money" style="position:absolute; top:73%; left:82%;display:none;"><p>0</p>
     </div>
 </div>
-<div class="sec" id="fries_01" onclick="third_other(this.id,80)"
+<div class="sec snack" id="fries_01" onclick="third_other(this.id,80)"
      style="border:0.6vh white solid;border-radius: 3vh; display:none;z-index:50;position:absolute;top:33.7vh;height:32.2107vw;width:74vw;left:12.7vw; background:#262E31;">
     <img class="sec_top" src="/media/source/fries_02.png" style="z-index:51;position:absolute;width:100%;top:0;left:0;">
     <img class="sec_bot" src="/media/source/80_01.png" style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
@@ -241,7 +242,29 @@
     <div class="sec_plus" id="fries_01_total_money" style="position:absolute; top:73%; left:82%;display:none;"><p>0</p>
     </div>
 </div>
-
+{% for each_order in favor_order %}
+<div class="sec favor" id ="favor_order_{{forloop.counter0}}"onclick="third_favor(this.id,80)">
+    <img class="sec_top" src="/media/img/favor/list_background.png" style="z-index:51;position:absolute;width:100%;top:0;left:0;">
+    <img class="sec_bot" src="/media/img/favor/list_bottom.png" style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
+    <div class="sec_favor_money" ><p>{{each_order.money}}</p></div><div class="sec_favor_burger"><p>{{each_order.burger}}</p></div><div class="sec_favor_drink"><p>{{each_order.drink}}</p></div><div class="sec_favor_snack"><p>{{each_order.snack}}</p></div>
+    <div class="list" style="display: none;">
+        <img class="listPageImg" src="/media/img/favor/list_detail.png" alt=" ">
+        <div class="listMenuField">
+            {% for ele in each_order.detail %}
+            <div  class="listMenuElements">
+                <img class="listMenuImg" src="/media/img/listManagement/{{ele.image}}" alt =" ">
+                <div class="listElementsAmount">
+                    <h1 class="elementsAmount">{{ele.number}}</h1>
+                </div>
+                <div class="listElementsPrice">
+                    <h1 class="elementsPrice">{{ele.money}}</h1>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endfor %}
 <img id="cart_icon" src="/media/img/購物車.png" alt=""
      style="z-index:50;position:fixed;width:9.19vw;bottom:3vw;right:2.3vw">
 
@@ -299,20 +322,30 @@
     <img src="/media/source/side/more.png" style="height:5vh;z-index:1002;position:absolute;top:5vh;left:56%;">
     <div style="height: 95vh; position: absolute; top:14.7588%;z-index: 1001;width:68.561%; overflow:auto;">
         {% for ele in order_data %}
-            <div id="side_order_each"
-                 style="width:100%;height:9.416%; margin-top: 3%;position: relative;overflow:hidden;">
-                <img src="/media/source/side/order.png" style="width:100%;">
-                <div class="side_order_money" style="position: absolute; top:2%;left:31.5%; ">
-                    <p style="font-size:10vw;position: absolute; top:0;display:inline-block;line-height: 1;font-weight:500;">{{ ele.total_money }}</p>
-                </div>
-                <div class="side_order_time" style="position: absolute; bottom:25%;left:5.7%; ">
-                    <p style="font-size:2.3vw;position: absolute; top:0;display:inline-block;line-height: 1;color:#898e90;font-weight:700;">{{ ele.create_time }}</p>
-                </div>
+        <div id="side_order_each"
+             style="width:100%;height:9.416%; margin-top: 3%;position: relative;overflow:hidden;">
+            <img src="/media/source/side/order.png" style="width:100%;">
+            <div class="side_order_money" style="position: absolute; top:2%;left:31.5%; ">
+                <p style="font-size:10vw;position: absolute; top:0;display:inline-block;line-height: 1;font-weight:500;">{{ ele.total_money }}</p>
             </div>
+            <div class="side_order_time" style="position: absolute; bottom:25%;left:5.7%; ">
+                <p style="font-size:2.3vw;position: absolute; top:0;display:inline-block;line-height: 1;color:#898e90;font-weight:700;">{{ ele.create_time }}</p>
+            </div>
+        </div>
         {% endfor %}
 
     </div>
 </div>
-
 </body>
 </html>
+<script>
+ $(document).ready(function(){
+    {% for each_order in favor_order %}
+        console.log({{each_order.money}})
+        favor_order_list.push("favor_order_"+{{forloop.counter0}})
+        var tmp_top = 10.3+23.4*{{forloop.counter0}}
+        tmp_top = tmp_top.toString()+"vh"
+        $("#favor_order_"+{{forloop.counter0}}).css("top",tmp_top)
+    {% endfor %}
+});
+</script>
