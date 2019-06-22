@@ -243,16 +243,21 @@
     </div>
 </div>
 {% for each_order in favor_order %}
-<div class="sec favor" id ="favor_order_{{forloop.counter0}}"onclick="third_favor(this.id,80)">
-    <img class="sec_top" src="/media/img/favor/list_background.png" style="z-index:51;position:absolute;width:100%;top:0;left:0;">
-    <img class="sec_bot" src="/media/img/favor/list_bottom.png" style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
-    <div class="sec_favor_money" ><p>{{each_order.money}}</p></div><div class="sec_favor_burger"><p>{{each_order.burger}}</p></div><div class="sec_favor_drink"><p>{{each_order.drink}}</p></div><div class="sec_favor_snack"><p>{{each_order.snack}}</p></div>
+<div class="sec favor" id="favor_order_{{forloop.counter0}}" onclick="third_favor(this.id,80)">
+    <img class="sec_top" src="/media/img/favor/list_background.png"
+         style="z-index:51;position:absolute;width:100%;top:0;left:0;">
+    <img class="sec_bot" src="/media/img/favor/list_bottom.png"
+         style="z-index:51;position:absolute;width:100%;bottom:0;left:0;">
+    <div class="sec_favor_money"><p>{{each_order.money}}</p></div>
+    <div class="sec_favor_burger"><p>{{each_order.burger}}</p></div>
+    <div class="sec_favor_drink"><p>{{each_order.drink}}</p></div>
+    <div class="sec_favor_snack"><p>{{each_order.snack}}</p></div>
     <div class="list" style="display: none;">
         <img class="listPageImg" src="/media/img/favor/list_detail.png" alt=" ">
         <div class="listMenuField">
             {% for ele in each_order.detail %}
-            <div  class="listMenuElements">
-                <img class="listMenuImg" src="/media/img/listManagement/{{ele.image}}" alt =" ">
+            <div class="listMenuElements">
+                <img class="listMenuImg" src="/media/img/listManagement/{{ele.image}}" alt=" ">
                 <div class="listElementsAmount">
                     <h1 class="elementsAmount">{{ele.number}}</h1>
                 </div>
@@ -326,10 +331,12 @@
              style="width:100%;height:9.416%; margin-top: 3%;position: relative;overflow:hidden;">
             <img src="/media/source/side/order.png" style="width:100%;">
             <div class="side_order_money" style="position: absolute; top:2%;left:31.5%; ">
-                <p style="font-size:10vw;position: absolute; top:0;display:inline-block;line-height: 1;font-weight:500;">{{ ele.total_money }}</p>
+                <p style="font-size:10vw;position: absolute; top:0;display:inline-block;line-height: 1;font-weight:500;">
+                    {{ ele.total_money }}</p>
             </div>
             <div class="side_order_time" style="position: absolute; bottom:25%;left:5.7%; ">
-                <p style="font-size:2.3vw;position: absolute; top:0;display:inline-block;line-height: 1;color:#898e90;font-weight:700;">{{ ele.create_time }}</p>
+                <p style="font-size:2.3vw;position: absolute; top:0;display:inline-block;line-height: 1;color:#898e90;font-weight:700;">
+                    {{ ele.create_time }}</p>
             </div>
         </div>
         {% endfor %}
@@ -348,4 +355,45 @@
         $("#favor_order_"+{{forloop.counter0}}).css("top",tmp_top)
     {% endfor %}
 });
+function favor_order(id){
+    {% for each_order in favor_order %}
+        console.log({{ forloop.counter0 }} == parseInt(id.split("favor_order_")[1]))
+        if({{ forloop.counter0 }} == parseInt(id.split("favor_order_")[1])){
+            {% for ele in each_order.detail %}
+                console.log("{{ele.image}}")
+                buy("{{ele.image}}".split(".png")[0],"{{ele.number}}")
+            {% endfor %}
+        }
+    {% endfor %}
+      $("#back").animate({"width":"66.67vw"},300);
+      $("body").append(' <div class="sec" id="'+id+'_tmp" style="opacity:0.5;border:0.6vh white solid;border-radius: 3vh; display:block;z-index:50;position:absolute;top:'+$("#"+id).position().top+'px;height:74.7964vw;width:74vw;left:12.7vw; background:#262E31;">'+$("#"+id).html()+'</div>')
+        setTimeout(function(){
+            $("#"+id+"_tmp").animate({
+                height:0,
+                top:"100vh",
+                left:"100vw",
+            },200);
+            // a little wired
+        },5);
+        setTimeout(function(){$("#"+id+"_tmp").remove();},200);
+
+        setTimeout(function(){third_record=0;},200)
+        $("#"+third_record_id).animate({
+          height:"32.2107vw",
+        },300);
+        $("#"+third_record_id+" > .list").animate({"opacity":0},300,function(){
+          $("#"+third_record_id).find(".sec_bot").attr("src","/media/img/favor/list_bottom.png");
+          $("#"+third_record_id+" > .list").css({"display":"none","opacity":1});
+        });
+        var RecordFavorList = 0;
+        for(var i =0; i<favor_order_list.length;i++){
+            if(RecordFavorList ==1){
+                $("#"+favor_order_list[i]).animate({"top":parseInt($("#"+favor_order_list[i]).css("top").replace(/px/,""))-$("#"+id+" > .sec_top").height()*0.321527-$("#"+id+"> .list").height()+"px"},300);
+            }else{
+            if(favor_order_list[i] == id) RecordFavorList = 1
+            }
+      }
+}
+# to use template system
+
 </script>
