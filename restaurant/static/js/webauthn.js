@@ -1,22 +1,22 @@
 function b64enc(buf) {
     return base64js.fromByteArray(buf)
-                   .replace(/\+/g, "-")
-                   .replace(/\//g, "_")
-                   .replace(/=/g, "");
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_")
+        .replace(/=/g, "");
 }
 
 function b64RawEnc(buf) {
     return base64js.fromByteArray(buf)
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_");
 }
 
 function hexEncode(buf) {
     return Array.from(buf)
-                .map(function(x) {
-                    return ("0" + x.toString(16)).substr(-2);
-				})
-                .join("");
+        .map(function (x) {
+            return ("0" + x.toString(16)).substr(-2);
+        })
+        .join("");
 }
 
 async function fetch_json(url, options) {
@@ -57,35 +57,35 @@ const didClickRegister = async (e) => {
     // request the authenticator(s) to create a new credential keypair.
     let credential;
     try {
-        publicKeyCredentialCreateOptions.pubKeyCredParams=[publicKeyCredentialCreateOptions.pubKeyCredParams[0]]
+        publicKeyCredentialCreateOptions.pubKeyCredParams = [publicKeyCredentialCreateOptions.pubKeyCredParams[0]]
         console.log(publicKeyCredentialCreateOptions)
 
-        publicKeyCredentialCreateOptions['authenticatorSelection']={
+        publicKeyCredentialCreateOptions['authenticatorSelection'] = {
             requireResidentKey: false,
             userVerification: "preferred"
         }
         console.log(publicKeyCredentialCreateOptions)
-        publicKeyCredentialCreateOptions.authenticatorSelection['requireResidentKey']=false
-        publicKeyCredentialCreateOptions.authenticatorSelection['userVerification']='preferred'
-        publicKeyCredentialCreateOptions.pubKeyCredParams=[
+        publicKeyCredentialCreateOptions.authenticatorSelection['requireResidentKey'] = false
+        publicKeyCredentialCreateOptions.authenticatorSelection['userVerification'] = 'preferred'
+        publicKeyCredentialCreateOptions.pubKeyCredParams = [
 
-                {type: "public-key", alg: -7},
-{type: "public-key", alg: -35},
-{type: "public-key", alg: -36},
-{type: "public-key", alg: -257},
-{type: "public-key", alg: -258},
-{type: "public-key", alg: -259},
-{type: "public-key", alg: -37},
-{type: "public-key", alg: -38},
-{type: "public-key", alg: -39},
-                {type: "public-key", alg: -8}
+            {type: "public-key", alg: -7},
+            {type: "public-key", alg: -35},
+            {type: "public-key", alg: -36},
+            {type: "public-key", alg: -257},
+            {type: "public-key", alg: -258},
+            {type: "public-key", alg: -259},
+            {type: "public-key", alg: -37},
+            {type: "public-key", alg: -38},
+            {type: "public-key", alg: -39},
+            {type: "public-key", alg: -8}
 
         ]
         credential = await navigator.credentials.create({
             publicKey: publicKeyCredentialCreateOptions
         });
     } catch (err) {
-        return console.error("Error creating credential:"+err.message.toString(), err);
+        return console.error("Error creating credential:" + err.message.toString(), err);
 
     }
 
@@ -176,11 +176,10 @@ const transformCredentialCreateOptions = (credentialCreateOptionsFromServer) => 
         atob(credentialCreateOptionsFromServer.challenge), c => c.charCodeAt(0));
 
     const transformedCredentialCreateOptions = Object.assign(
-            {}, credentialCreateOptionsFromServer,
-            {challenge, user});
+        {}, credentialCreateOptionsFromServer,
+        {challenge, user});
     return transformedCredentialCreateOptions;
 }
-
 
 
 /**
@@ -274,9 +273,9 @@ const postNewAssertionToServer = async (credentialDataForServer) => {
 
     return await fetch_json(
         "/verify_credential_info", {
-        method: "POST",
-        body: formData
-    });
+            method: "POST",
+            body: formData
+        });
 }
 
 /**
@@ -313,9 +312,9 @@ const postAssertionToServer = async (assertionDataForServer) => {
 
     return await fetch_json(
         "/verify_assertion", {
-        method: "POST",
-        body: formData
-    });
+            method: "POST",
+            body: formData
+        });
 }
 
 

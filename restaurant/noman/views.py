@@ -32,7 +32,8 @@ meal_img = {
 
 # Create your views here.
 def index(request):
-    return render(request, "index.html")
+    return HttpResponseRedirect(reverse_lazy('cart'))
+    # return render(request, "index.html")
 
 
 def set_order(order_name, nums, meal):
