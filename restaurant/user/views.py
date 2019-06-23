@@ -14,8 +14,8 @@ from user.models import User
 import random, string, os
 import webauthn.webauthn as webauthn
 
-RP_ID = 'localhost'
-ORIGIN = 'https://localhost:8000'
+RP_ID = 'chendin.tk'
+ORIGIN = 'https://chendin.tk'
 TRUST_ANCHOR_DIR = 'trusted_attestation_roots'
 
 meal_img = {

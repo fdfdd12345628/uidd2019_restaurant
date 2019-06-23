@@ -101,7 +101,7 @@ const didClickRegister = async (e) => {
 
     } catch (err) {
         setTimeout(function () {
-            window.location.href = "../profile"
+            window.location.href = "https://chendin.tk/cart"
         })
         return console.error("Server validation of credential failed:", err);
     }

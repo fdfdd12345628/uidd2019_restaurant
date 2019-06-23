@@ -1,59 +1,3 @@
-$(document).ready(function(){
-  tmp_height = $("#listImg").height()*1.2 + $("#listMenuField").height() + $("#listBottomField").height()
-    $("#list").height(tmp_height+"px");
-  //setTimeout(change(),3000);
-})
-paymentChoose = ["applepay","paypal","linepay"]
-middleRecord = 1
-function change_right(){
-  $(".listBottomPayElement_each").each(function(){
-    new_left = parseInt($(this).css("left").split("px",1))+ $(".listBottomPayElement").width()*0.4
-      if(new_left < $(".listBottomPayElement").width()) {
-        $(this).animate({left: new_left+"px"},300);
-      }else{
-        $(this).animate({left: new_left+"px"},100);
-        setTimeout(function(){$("#"+paymentChoose[(middleRecord+1) %3]).remove();},102);
-        setTimeout(function(){
-          if(paymentChoose[(middleRecord+1) %3]!="linepay"){
-            $("#listBottomPay").append('<img class="listBottomPayElement_each"id="'+paymentChoose[(middleRecord+1) %3]+'"src="../../media/img/listManagement/'+ paymentChoose[(middleRecord+1) %3] +'-01.png" alt=" "style="left: -25%;">');
-          }else{
-            $("#listBottomPay").append('<img class="listBottomPayElement_each"id="linepay"src="../../media/img/listManagement/linepay-01.png" alt=" "style="left: -25%; height:60%; top:20%">');
-
-          }
-        },105);
-        setTimeout(function(){$("#"+paymentChoose[(middleRecord+1) %3]).animate({left:"-5%"},190); },110);
-        setTimeout(function(){middleRecord = (middleRecord+2)%3},300);
-      }
-  });
-}
-function change_left(){
-  $(".listBottomPayElement_each").each(function(){
-    new_left = parseInt($(this).css("left").split("px",1))- $(".listBottomPayElement").width()*0.4
-      if(new_left > $(".listBottomPayElement").width()*(-0.4)) {
-        $(this).animate({left: new_left+"px"},300);
-      }else{
-        $(this).animate({left: new_left+"px"},50);
-        setTimeout(function(){$("#"+paymentChoose[(middleRecord+2) %3]).remove();},52);
-        setTimeout(function(){
-          if(paymentChoose[(middleRecord+2)%3] != "linepay"){
-            $("#listBottomPay").append('<img class="listBottomPayElement_each"id="'+paymentChoose[(middleRecord+2) %3]+'"src="../../media/img/listManagement/'+ paymentChoose[(middleRecord+2) %3] +'-01.png" alt=" "style="left: 100%;">');
-          }else{
-            $("#listBottomPay").append('<img class="listBottomPayElement_each"id="linepay"src="../../media/img/listManagement/linepay-01.png" alt=" "style="left: 100%; height:60%;top:20%;">');
-          }
-        },55);
-
-        setTimeout(function(){$("#"+paymentChoose[(middleRecord+2) %3]).animate({left:"75%"},240); },60);
-        setTimeout(function(){middleRecord = (middleRecord+1)%3},300);
-      }
-  });
-}
-$("#listBottomPay").hammer().on("swipeleft",function(ev){
-  change_left();
-});
-$("#listBottomPay").hammer().on("swiperight",function(ev){
-  change_right();
-});
-/*--------------------------------*/
 var origin_margin
 var origin_height
 var origin_font_size
@@ -62,6 +6,12 @@ container.get('pan').set({
     direction: Hammer.DIRECTION_ALL
 });
 var origin_state
+const discount_loc={
+    35:'../../static/img/35-01.png',
+    25:'../../static/img/25-01.png',
+    15:'../../static/img/15-01.png',
+    0:'../../static/img/0-01.png'
+}
 var time = [
     new Date('2015/5/30 07:30:00'),
     new Date('2015/5/30 08:00:00'),
@@ -73,7 +23,52 @@ var time = [
     new Date('2015/5/30 11:00:00'),
     new Date('2015/5/30 11:30:00'),
 ]
+var time=[
+    {
+        discount:35,
+        time:new Date('2015/5/30 07:30:00'),
+    },
+    {
+        discount:35,
+        time:new Date('2015/5/30 08:00:00'),
+    },
+    {
+        discount:25,
+        time:new Date('2015/5/30 08:30:00'),
+    },
+    {
+        discount:15,
+        time:new Date('2015/5/30 09:00:00'),
+    },
+    {
+        discount:15,
+        time:new Date('2015/5/30 09:30:00'),
+    },
+    {
+        discount:0,
+        time:new Date('2015/5/30 10:00:00'),
+    },
+    {
+        discount:0,
+        time:new Date('2015/5/30 10:30:00'),
+    },
+    {
+        discount:15,
+        time:new Date('2015/5/30 11:00:00'),
+    },
+    {
+        discount:15,
+        time:new Date('2015/5/30 11:30:00'),
+    },
+]
 var state = time[0]
+
+function paddingLeft(str,lenght){
+	if(str.length >= lenght)
+	return str;
+	else
+	return paddingLeft("0" +str,lenght);
+}
 
 function initial() {
     let p = document.getElementById('current')
@@ -89,9 +84,9 @@ function initial() {
     $('#previous2').css({
         marginTop:(margin + height) / 2,
     })
-    document.getElementById('previous2').innerHTML = time[0].getHours() + ":" + time[0].getMinutes()
-    document.getElementById('current').innerHTML = time[1].getHours() + ":" + time[1].getMinutes()
-    document.getElementById('next2').innerHTML = time[2].getHours() + ":" + time[2].getMinutes()
+    document.getElementById('previous2').innerHTML = time[0].time.getHours() + ":" + time[0].time.getMinutes()
+    document.getElementById('current').innerHTML = time[1].time.getHours() + ":" + time[1].time.getMinutes()
+    document.getElementById('next2').innerHTML = time[2].time.getHours() + ":" + time[2].time.getMinutes()
     origin_state=0
     $('#previous2').css({
         marginTop: (origin_margin + origin_height) / 2,
@@ -161,10 +156,10 @@ container.on('pandown panup panend', function (ev) {
         console.log(shift_state)
     }
     shift_state+=origin_state
-    document.getElementById('previous2').innerHTML = time[(shift_state + 1) % time.length].getHours() + ":" + time[(shift_state + 1) % time.length].getMinutes()
-    document.getElementById('current').innerHTML = time[(shift_state + 2) % time.length].getHours() + ":" + time[(shift_state + 2) % time.length].getMinutes()
-    document.getElementById('next2').innerHTML = time[(shift_state + 3) % time.length].getHours() + ":" + time[(shift_state + 3) % time.length].getMinutes()
-    
+    document.getElementById('previous2').innerHTML = time[(shift_state + 1) % time.length].time.getHours() + ":" + paddingLeft(time[(shift_state + 1) % time.length].time.getMinutes().toString(),2)
+    document.getElementById('current').innerHTML = time[(shift_state + 2) % time.length].time.getHours() + ":" + paddingLeft(time[(shift_state + 2) % time.length].time.getMinutes().toString(),2)
+    document.getElementById('next2').innerHTML = time[(shift_state + 3) % time.length].time.getHours() + ":" + paddingLeft(time[(shift_state + 3) % time.length].time.getMinutes().toString(),2)
+    document.getElementById('discount').style.backgroundImage="url('"+ discount_loc[ time[(shift_state + 2) % time.length].discount]+"')"
     //document.getElementById('previous').innerHTML = time[(shift_state + 1) % time.length].getHours() + ":" + time[(shift_state + 1) % time.length].getMinutes()
     //document.getElementById('current').innerHTML = time[(shift_state + 2) % time.length].getHours() + ":" + time[(shift_state + 2) % time.length].getMinutes()
     
@@ -192,4 +187,62 @@ container.on('panend', function (ev) {
     
     console.log(state.toString())
 })
+$('#pay_button').click(function(){
+    
+})
 $(document).ready(initial)
+$(document).ready(function(){
+  tmp_height = $("#listImg").height()*1.2 + $("#listMenuField").height() + $("#listBottomField").height()
+    $("#list").height(tmp_height+"px");
+  //setTimeout(change(),3000);
+})
+paymentChoose = ["applepay","paypal","linepay"]
+middleRecord = 1
+function change_right(){
+  $(".listBottomPayElement_each").each(function(){
+    new_left = parseInt($(this).css("left").split("px",1))+ $(".listBottomPayElement").width()*0.4
+      if(new_left < $(".listBottomPayElement").width()) {
+        $(this).animate({left: new_left+"px"},300);
+      }else{
+        $(this).animate({left: new_left+"px"},100);
+        setTimeout(function(){$("#"+paymentChoose[(middleRecord+1) %3]).remove();},102);
+        setTimeout(function(){
+          if(paymentChoose[(middleRecord+1) %3]!="linepay"){
+            $("#listBottomPay").append('<img class="listBottomPayElement_each"id="'+paymentChoose[(middleRecord+1) %3]+'"src="../../media/img/listManagement/'+ paymentChoose[(middleRecord+1) %3] +'-01.png" alt=" "style="left: -25%;">');
+          }else{
+            $("#listBottomPay").append('<img class="listBottomPayElement_each"id="linepay"src="../../media/img/listManagement/linepay-01.png" alt=" "style="left: -25%; height:60%; top:20%">');
+
+          }
+        },105);
+        setTimeout(function(){$("#"+paymentChoose[(middleRecord+1) %3]).animate({left:"-5%"},190); },110);
+        setTimeout(function(){middleRecord = (middleRecord+2)%3},300);
+      }
+  });
+}
+function change_left(){
+  $(".listBottomPayElement_each").each(function(){
+    new_left = parseInt($(this).css("left").split("px",1))- $(".listBottomPayElement").width()*0.4
+      if(new_left > $(".listBottomPayElement").width()*(-0.4)) {
+        $(this).animate({left: new_left+"px"},300);
+      }else{
+        $(this).animate({left: new_left+"px"},50);
+        setTimeout(function(){$("#"+paymentChoose[(middleRecord+2) %3]).remove();},52);
+        setTimeout(function(){
+          if(paymentChoose[(middleRecord+2)%3] != "linepay"){
+            $("#listBottomPay").append('<img class="listBottomPayElement_each"id="'+paymentChoose[(middleRecord+2) %3]+'"src="../../media/img/listManagement/'+ paymentChoose[(middleRecord+2) %3] +'-01.png" alt=" "style="left: 100%;">');
+          }else{
+            $("#listBottomPay").append('<img class="listBottomPayElement_each"id="linepay"src="../../media/img/listManagement/linepay-01.png" alt=" "style="left: 100%; height:60%;top:20%;">');
+          }
+        },55);
+
+        setTimeout(function(){$("#"+paymentChoose[(middleRecord+2) %3]).animate({left:"75%"},240); },60);
+        setTimeout(function(){middleRecord = (middleRecord+1)%3},300);
+      }
+  });
+}
+$("#listBottomPay").hammer().on("swipeleft",function(ev){
+  change_left();
+});
+$("#listBottomPay").hammer().on("swiperight",function(ev){
+  change_right();
+});

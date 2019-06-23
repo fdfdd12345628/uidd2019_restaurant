@@ -27,6 +27,18 @@ body {
   z-index: -1;
 }
 
+#discount{
+    position: absolute;
+    top: 35vh;
+    background-image: url('');
+    left: 10vh;
+    right: 10vh;
+    height: 8vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
 .time_text{
   font-size: 5vh;
   margin-bottom: 0vh;
