@@ -203,6 +203,9 @@ def payment_complete(request, id_num=0):
             return HttpResponseRedirect(reverse_lazy('cart'))
         if current_order.progress >= 2:
             return HttpResponse('already paid', status=200)
+        current_order.progress=2
+        current_order.save()
+        return HttpResponse(status=200)
         basic_auth = base64.b64encode(bytes(PAYPAL_CLIENT_ID + ':' + PAYPAL_SECRET, 'utf-8'))
         print(str(basic_auth)[2:-1])
         auth = requests.post(PAYPAL_OAUTH_API, headers={
