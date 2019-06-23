@@ -357,12 +357,13 @@
     {% endfor %}
 });
 function favor_order(id){
+    $(".sec_bot").removeAttr("onclick");
     {% for each_order in favor_order %}
         console.log({{ forloop.counter0 }} == parseInt(id.split("favor_order_")[1]))
         if({{ forloop.counter0 }} == parseInt(id.split("favor_order_")[1])){
             {% for ele in each_order.detail %}
-                console.log("{{ele.image}}")
-                buy("{{ele.image}}".split(".png")[0],"{{ele.number}}")
+                //console.log("{{ele.image}}")
+                buy("{{ele.name}}".split("cart_")[1],"{{ele.number}}")
             {% endfor %}
         }
     {% endfor %}

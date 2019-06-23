@@ -85,6 +85,7 @@ def cart(request):
                 if meal_img[temp_meal.name] not in exist_list:
                     temp_list.append({
                         "image": meal_img[temp_meal.name],
+                        "name": temp_meal.name,
                         "number": temp_spmeal.number,
                         "money": temp_spmeal.number *temp_meal.money},
                     )
@@ -97,6 +98,7 @@ def cart(request):
             temp_content["detail"] = temp_list
             order_data_list.append(temp_content)
         content['favor_order'] = order_data_list
+        print(order_data_list)
         return render(request, 'cart.html', content)
     if request.method == "POST":
         dic = json.loads(request.POST.get('meal', ''))
