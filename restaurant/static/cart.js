@@ -112,6 +112,9 @@ $("body,#cart_field").hammer().on("swiperight",function(ev){
 });
 });
 
+
+
+
 function solve_mult(){
   prevent_mult = 1;
   setTimeout(function(){prevent_mult =0},100);
