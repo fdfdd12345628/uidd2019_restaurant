@@ -3,33 +3,55 @@ var mode=1;
 var second_order = document.getElementsByClassName("order bg p2");
 var fiest_order = document.getElementsByClassName("order bg p1");
 $(document).hammer().on("panleft ",function(ev){
+      //alert(ev.target.id);
         if(mode==1){
-            $("#slider").animate({left:"33vw"},"normal",function(){
+            window.setTimeout(function() {
+                $("#slider").animate({left:"33vw"},"normal",function(){
                  mode2();
                  mode=2;
             });
+            }, 10 );
+
         }
         else if(mode==2){
-             $("#slider").animate({left:"67vw"},"normal",function(){
+            window.setTimeout(function() {
+                 $("#slider").animate({left:"67vw"},"normal",function(){
                  mode3();
                  mode=3;
             });
+            },10);
+
         }
 });
 $(document).hammer().on("panright ",function(ev){
+      //alert(ev.target.id);
         if(mode==3){
-            $("#slider").animate({left:"33vw"},"normal",function(){
-                mode2();
-            });
-             mode=2;
+            window.setTimeout(function() {
+                 $("#slider").animate({left:"33vw"},"normal",function(){
+                    mode2();
+                    mode=2;
+                });
+            },10);
+
         }
         else if(mode==2){
-             $("#slider").animate({left:"0vw"},"normal",function(){
-                mode1();
-            });
-              mode=1;
+             window.setTimeout(function() {
+                 $("#slider").animate({left:"0vw"},"normal",function(){
+                    mode1();
+                    mode=1;
+                });
+             },10);
+
         }
-    });
+});
+
+
+
+$(".order").hammer().on("panleft",function(ev){
+        alert(ev.target.id);
+
+ });
+
 
 function favor(o,part){
     //var money = $(o).find('.money');

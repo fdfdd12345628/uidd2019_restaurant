@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <title>{{ request.user.username }}'s profile</title>
 </head>
-<body >
+<body  style="margin:0">
     <img id="order_bag"  src="/media/img/profile/un-01.png" style="height: 22vh;z-index: 10;text-align: center;display:block">
     <img id="finish" src="/media/img/profile/com-01.png" style="height: 22vh;z-index: 10;text-align: center;display: none">
     <img id="set" src="/media/img/profile/set-01.png" style="height: 22vh;z-index: 10;text-align: center;display: none">
@@ -25,7 +25,7 @@
      <div class="order_bag" style="overflow: hidden;width: 100vw";>
         {% for  ele in content %}
             <div class="order bg p1"  id="o-{{ forloop.counter }}" style="background-image:url('/media/img/profile/list2-01.png');height: 13vh;z-index: 20;top:0.625vh;left:0vw;" onclick="favor(this,1)">
-            <img class="progress" src="/media/img/profile/0-01.png" style="position: absolute;height: 2.2vh;left: 60vw;top:2.5vh">
+            <img class="progress" src="/media/img/profile/0-0{{ ele.progress }}.png" style="position: absolute;height: 2.2vh;left: 60vw;top:2.5vh">
             <p class="money" style="color: white;font-size:4.44vh;top:-3vh;left:30vw;position: absolute">{{ ele.money }}</p>
             <p class="burger" style="color: white;font-size:3vh;top:5.2vh;left:20vw;position: absolute;">{{ ele.burger }}</p>
             <p class="drink" style="color: white;font-size:3vh;top:5.2vh;left:40vw;position: absolute">{{ ele.drink }}</p>
