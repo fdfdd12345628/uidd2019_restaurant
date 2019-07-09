@@ -7,8 +7,14 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 import json, base64
 import requests
+from django.db import transaction
 from django.apps import apps
-from restaurant.settings import PAYPAL_CLIENT_ID, PAYPAL_OAUTH_API, PAYPAL_ORDER_API, PAYPAL_SECRET
+from django.conf import settings
+
+PAYPAL_CLIENT_ID = settings.PAYPAL_CLIENT_ID
+PAYPAL_OAUTH_API = settings.PAYPAL_OAUTH_API
+PAYPAL_ORDER_API = settings.PAYPAL_ORDER_API
+PAYPAL_SECRET = settings.PAYPAL_SECRET
 
 
 meal_img = {
@@ -106,18 +112,19 @@ def cart(request):
         print(dic)
         meal = ""
         bulk = []
-        max_meal_id = special_meal.objects.all().order_by("-id")[0].id
-        print(max_meal_id)
-        for i, (key, value) in enumerate(dic.items()):
-            print("{} {}".format(key, value))
-            # meal = set_order(key, value, meal)
-            if (meal != ""):
-                meal = meal + "," + str(max_meal_id + 1)
-            else:
-                meal = str(max_meal_id + 1)
-            select_meal = Meal.objects.get(name=key)
-            bulk.append(special_meal(id=max_meal_id + i + 1, meal_id=select_meal, number=value))
-        special_meal.objects.bulk_create(bulk)
+        with transaction.atomic():
+            max_meal_id = special_meal.objects.all().order_by("-id")[0].id
+            print(max_meal_id)
+            for i, (key, value) in enumerate(dic.items()):
+                print("{} {}".format(key, value))
+                # meal = set_order(key, value, meal)
+                if (meal != ""):
+                    meal = meal + "," + str(max_meal_id + 1)
+                else:
+                    meal = str(max_meal_id + 1)
+                select_meal = Meal.objects.get(name=key)
+                bulk.append(special_meal(id=max_meal_id + i + 1, meal_id=select_meal, number=value))
+            special_meal.objects.bulk_create(bulk)
         owner = User.objects.get(id="2")
         max_id = order.objects.all().order_by("-id")[0].id
         print(request.POST.get("money", ""))
